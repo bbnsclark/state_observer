@@ -1,0 +1,4 @@
+string cmd
+string target_mode
+---
+string success
