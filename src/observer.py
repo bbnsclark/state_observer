@@ -24,7 +24,7 @@ NODES = {
     'imu': {'name': 'imu', 'topic': '/imu', 'script': 'start_imu.sh', 'status': 'stopped', 'topic_type': Imu, 'timeout': 15.0 },
     'drive': {'name': 'drive', 'topic': '/odom_wheel', 'script': 'start_drive.sh', 'status': 'stopped', 'topic_type': Odometry, 'timeout': 2.0 },
     'lidar': {'name': 'lidar', 'topic': '/scan', 'tag': '/LIDAR', 'script': 'start_lidar.sh', 'status': 'stopped', 'topic_type': LaserScan, 'timeout': 2.0 },
-    'realsense': {'name': 'realsense', 'topic': '/camera/infra1/camera_info', 'script': 'start_realsense.sh', 'status': 'stopped', 'topic_type': CameraInfo, 'timeout': 2.0},
+    'realsense': {'name': 'realsense', 'topic': '/camera/infra1/camera_info', 'script': 'start_realsense.sh', 'status': 'stopped', 'topic_type': CameraInfo, 'timeout': 10.0},
     'icp':{'name': 'icp', 'topic': '/odom_lidar', 'script': 'start_lidar_icp.sh', 'status': 'stopped', 'topic_type': Odometry, 'timeout': 2.0 },
     'ekf_inertial': {'name': 'ekf_inertial', 'topic': '/odom_inertial', 'script': 'start_ekf_inertial.sh', 'status': 'stopped', 'topic_type': Odometry, 'timeout': 2.0 },
     'map_inertial': {'name': 'map_inertial', 'topic': '/map', 'script': 'start_map_inertial.sh', 'status': 'stopped', 'topic_type': OccupancyGrid, 'timeout': 10.0 },
