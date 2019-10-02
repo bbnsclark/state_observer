@@ -35,7 +35,8 @@ NODES = {
     'nav_sat': {'name': 'nav_sat', 'topic': '/odom_gps', 'script': 'start_nav_sat.sh', 'status': 'stopped', 'topic_type': Odometry, 'timeout': 10.0 },
     'ekf_global': {'name': 'ekf_global', 'topic': '/odom_global', 'script': 'start_ekf_global.sh', 'status': 'stopped', 'topic_type': Odometry, 'timeout': 2.0 },
     'nav_global': {'name': 'nav_global', 'topic': '/MOVE_GLOBAL/local_costmap/costmap', 'script': 'start_nav_global.sh', 'status': 'stopped', 'topic_type': OccupancyGrid, 'timeout': 15.0 },
-    'map_global': {'name': 'map_global', 'topic': 'start_map_global.sh', 'script': 'start_map_global.sh', 'status': 'stopped', 'topic_type': OccupancyGrid, 'timeout': 10.0 }
+    'map_global': {'name': 'map_global', 'topic': '/map_global', 'script': 'start_map_global.sh', 'status': 'stopped', 'topic_type': OccupancyGrid, 'timeout': 10.0 },
+    'control_global': {'name': 'control_global', 'topic': 'controller_check', 'script': 'start_control_global.sh', 'status': 'stopped', 'topic_type': Float64, 'timeout': 10.0 }
 }
 
 class Observer:
@@ -48,7 +49,7 @@ class Observer:
 
         self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial']}.values()
 
-        self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver', 'gps_conv', 'gps_init', 'nav_sat', 'ekf_global', 'nav_global']}.values()
+        self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver', 'gps_conv', 'gps_init', 'nav_sat', 'ekf_global', 'nav_global', 'control_global']}.values()
 
         self.system_states = ['idle', 'broadcasting', 'fault']
 
