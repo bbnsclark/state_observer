@@ -147,46 +147,40 @@ class Observer:
 
     def set_system_mode(self, new_mode):
 
-        if new_mode != self.current_system_mode:
+        self.set_mode_on = True
 
-            self.set_mode_on = True
+        self.manager.stop_stack(self.system_nodes[self.current_system_mode])
 
-            self.manager.stop_stack(self.system_nodes[self.current_system_mode])
+        self.manager.start_stack(self.system_nodes[new_mode])
+    
+        time.sleep(1.0)
 
-            self.manager.start_stack(self.system_nodes[new_mode])
-        
-            time.sleep(1.0)
+        current_nodes = self.common_nodes + self.system_nodes[self.current_system_mode]
 
-            current_nodes = self.common_nodes + self.system_nodes[self.current_system_mode]
+        failed_starts = self.manager.check_stack(self.system_nodes[new_mode])
 
-            failed_starts = self.manager.check_stack(self.system_nodes[new_mode])
+        for node in current_nodes:
 
-            for node in current_nodes:
+            if node['name'] != 'gps_init':
 
-                if node['name'] != 'gps_init':
+                try:
 
-                    try:
+                    rospy.wait_for_message(node['topic'], node['topic_type'], node['timeout'])
 
-                        rospy.wait_for_message(node['topic'], node['topic_type'], node['timeout'])
+                except:
 
-                    except:
+                    failed_starts.append(node['name'])
 
-                        failed_starts.append(node['name'])
+    
+        if failed_starts != []:
 
-        
-            if failed_starts != []:
-
-                reply = 'set mode failed for following packages: ' + str(failed_starts)
-
-            else:
-
-                reply = 'set mode completed successfully'
-
-                self.current_system_mode = new_mode
+            reply = 'set mode failed for following packages: ' + str(failed_starts)
 
         else:
 
-            reply = 'system already in ' + new_mode + ' mode'
+            reply = 'set mode completed successfully'
+
+            self.current_system_mode = new_mode
 
         self.set_mode_on = False
 
