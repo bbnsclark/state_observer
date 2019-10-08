@@ -147,6 +147,8 @@ class Observer:
 
     def set_system_mode(self, new_mode):
 
+        self.current_system_mode = new_mode
+
         self.set_mode_on = True
 
         self.manager.stop_stack(self.system_nodes[self.current_system_mode])
@@ -179,8 +181,6 @@ class Observer:
         else:
 
             reply = 'set mode completed successfully'
-
-            self.current_system_mode = new_mode
 
         self.set_mode_on = False
 
