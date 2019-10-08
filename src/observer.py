@@ -73,7 +73,11 @@ class Observer:
         current_nodes = self.common_nodes + self.system_nodes[self.current_system_mode]
 
         # during mode change, we pause this service...
-        if not self.set_mode_on:
+        if self.set_mode_on:
+
+            self.current_system_diagnostics = 'awaiting mode change...'
+
+        else:
 
             # first we'll check if there are any missing nodes in the network
             self.failed_nodes = self.manager.check_stack(current_nodes)    
@@ -98,10 +102,6 @@ class Observer:
             else:
 
                 self.self_healing_required = False
-
-        else:
-
-            self.current_system_diagnostics = 'awaiting mode change...'
 
 
     def heal_nodes(self):
@@ -157,10 +157,23 @@ class Observer:
         
             time.sleep(1.0)
 
+            current_nodes = self.common_nodes + self.system_nodes[self.current_system_mode]
+
             failed_starts = self.manager.check_stack(self.system_nodes[new_mode])
 
-            self.current_system_mode = new_mode
+            for node in current_nodes:
 
+                if node['name'] != 'gps_init':
+
+                    try:
+
+                        rospy.wait_for_message(node['topic'], node['topic_type'], node['timeout'])
+
+                    except:
+
+                        failed_starts.append(node['name'])
+
+        
             if failed_starts != []:
 
                 reply = 'set mode failed for following packages: ' + str(failed_starts)
@@ -168,6 +181,8 @@ class Observer:
             else:
 
                 reply = 'set mode completed successfully'
+
+                self.current_system_mode = new_mode
 
         else:
 

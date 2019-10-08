@@ -17,6 +17,7 @@ from nav_msgs.msg import Odometry
 from sensor_msgs.msg import LaserScan
 from sensor_msgs.msg import NavSatFix
 from state_observer.srv import SetMode
+from sensor_msgs.msg import BatteryState
 from state_observer.msg import Diagnostics
 from geometry_msgs.msg import Quaternion, Twist
 
@@ -31,6 +32,8 @@ class Node:
         self.rate = 0.1
 
         self.pub_diag = rospy.Publisher('/system_diagnostics', Diagnostics, queue_size = 1)
+
+        self.pub_batt = rospy.Publisher('/battery', BatteryState, queue_size = 1)
 
         self.srv_cmd_state = rospy.Service('set_mode', SetMode, self.set_mode_callback)
 
