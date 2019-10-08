@@ -151,42 +151,17 @@ class Observer:
 
         self.manager.stop_stack(self.system_nodes[self.current_system_mode])
 
-        time.sleep(2.0)
+        time.sleep(3.0)
 
         self.current_system_mode = new_mode
 
         self.manager.start_stack(self.system_nodes[new_mode])
     
-        time.sleep(1.0)
+        time.sleep(2.0)
 
-        current_nodes = self.common_nodes + self.system_nodes[self.current_system_mode]
+        self.get_system_info()
 
-        failed_starts = self.manager.check_stack(self.system_nodes[new_mode])
-
-        for node in current_nodes:
-
-            if node['name'] != 'gps_init':
-
-                try:
-
-                    rospy.wait_for_message(node['topic'], node['topic_type'], node['timeout'])
-
-                except:
-
-                    failed_starts.append(node['name'])
-
-    
-        if failed_starts != []:
-
-            reply = 'set mode failed for following packages: ' + str(failed_starts)
-
-        else:
-
-            reply = 'set mode completed successfully'
-
-        self.set_mode_on = False
-
-        return reply
+        return self.current_system_diagnostics
 
 
     def system_reset(self):
