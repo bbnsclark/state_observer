@@ -156,12 +156,6 @@ class Observer:
         self.current_system_mode = new_mode
 
         self.manager.start_stack(self.system_nodes[new_mode])
-    
-        time.sleep(2.0)
-
-        self.get_system_info()
-
-        return self.current_system_diagnostics
 
 
     def system_reset(self):
