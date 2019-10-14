@@ -157,6 +157,8 @@ class Observer:
 
         self.manager.start_stack(self.system_nodes[new_mode])
 
+        self.set_mode_on = False
+
 
     def system_reset(self):
 
