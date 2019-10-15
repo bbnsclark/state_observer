@@ -36,7 +36,9 @@ NODES = {
     'ekf_global': {'name': 'ekf_global', 'topic': '/odom_global', 'script': 'start_ekf_global.sh', 'status': 'stopped', 'topic_type': Odometry, 'timeout': 2.0 },
     'nav_global': {'name': 'nav_global', 'topic': '/MOVE_GLOBAL/local_costmap/costmap', 'script': 'start_nav_global.sh', 'status': 'stopped', 'topic_type': OccupancyGrid, 'timeout': 15.0 },
     'map_global': {'name': 'map_global', 'topic': '/map_global', 'script': 'start_map_global.sh', 'status': 'stopped', 'topic_type': OccupancyGrid, 'timeout': 10.0 },
-    'control_global': {'name': 'control_global', 'topic': 'controller_check', 'script': 'start_control_global.sh', 'status': 'stopped', 'topic_type': Float64, 'timeout': 10.0 }
+    'control_global': {'name': 'control_global', 'topic': 'controller_check', 'script': 'start_control_global.sh', 'status': 'stopped', 'topic_type': Float64, 'timeout': 10.0 },
+    'avoid_inertial': {'name': 'avoid_inertial', 'topic': '/obstacles', 'script': 'start_avoidance_inertial.sh', 'status': 'stopped', 'topic_type': PointCloud2, 'timeout': 10.0 },
+    'avoid_global': {'name': 'avoid_global', 'topic': '/obstacles', 'script': 'start_avoidance_global.sh', 'status': 'stopped', 'topic_type': PointCloud2, 'timeout': 10.0 }
 }
 
 class Observer:
@@ -47,9 +49,9 @@ class Observer:
 
         self.common_nodes = {k:v for k,v in NODES.items() if k in ['imu', 'drive', 'icp', 'ekf_inertial', 'lidar', 'realsense']}.values()
 
-        self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial']}.values()
+        self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'avoid_inertial']}.values()
 
-        self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver', 'gps_conv', 'gps_init', 'nav_sat', 'ekf_global', 'nav_global', 'control_global']}.values()
+        self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver', 'gps_conv', 'gps_init', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global']}.values()
 
         self.system_states = ['idle', 'broadcasting', 'fault']
 
