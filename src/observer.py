@@ -115,15 +115,19 @@ class Observer:
 
             self.update_system_info()
 
+            print('Initial test: ')
+
             print(self.failed_nodes)
 
             if self.failed_nodes != []:
 
                 self.heal_nodes()
-                
-                print(self.failed_nodes)
 
                 self.update_system_info(which_nodes='healed')
+
+                print('After healing: ')
+                
+                print(self.failed_nodes)
 
                 if self.failed_nodes != []:
 
