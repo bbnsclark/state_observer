@@ -149,13 +149,7 @@ class Observer:
 
         else:
 
-            if self.startup_mode:
-                
-                self.current_system_diagnostics = 'starting up'
-
-            else:
-                
-                self.current_system_diagnostics = 'switching modes...'
+            self.current_system_diagnostics = 'transition mode'
                 
         self.count += 1
 
