@@ -115,57 +115,46 @@ class Observer:
 
     def get_system_info(self):
 
-        if self.set_mode_on:
+        self.update_system_on = True
 
-            self.current_system_diagnostics = 'changing mode'
+        self.update_system_info()
 
-        else:
+        print('Initial test: ')
 
-            self.update_system_on = True
+        print(self.failed_nodes)
 
-            self.update_system_info()
+        if self.failed_nodes != []:
 
-            print('Initial test: ')
+            self.heal_nodes()
 
+            self.update_system_info(which_nodes='healed')
+
+            print('After healing: ')
+            
             print(self.failed_nodes)
 
             if self.failed_nodes != []:
 
-                self.heal_nodes()
-
-                self.update_system_info(which_nodes='healed')
-
-                print('After healing: ')
-                
-                print(self.failed_nodes)
-
-                if self.failed_nodes != []:
-
-                    self.current_system_diagnostics = 'self-healing attempted but failed. faulty nodes: ' + str(self.failed_nodes)
-
-                else:
-
-                    self.current_system_diagnostics = 'self-healing completed successfully. system healthy'
+                self.current_system_diagnostics = 'self-healing attempted but failed. faulty nodes: ' + str(self.failed_nodes)
 
             else:
 
-                self.current_system_diagnostics = 'system healthy'
-                
-            self.update_system_on = False
+                self.current_system_diagnostics = 'self-healing completed successfully. system healthy'
+
+        else:
+
+            self.current_system_diagnostics = 'system healthy'
+            
+        self.update_system_on = False
 
         return (self.current_system_mode, self.current_system_diagnostics)
 
 
     def set_system_mode(self, new_mode):
 
-        # wait for the system to complete updating its status
-        while self.update_system_on:
-
-            time.sleep(0.25)
-
         self.current_system_mode = new_mode
 
-        return 'mode set to :' + str(self.current_system_mode)
+        return 'mode set to: ' + str(self.current_system_mode)
 
         # # now, blocking updates until new mode is set
         # self.set_mode_on = True
