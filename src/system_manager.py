@@ -19,7 +19,7 @@ class SystemManager:
 
     def stop_package(self, package):
 
-        cmd = 'screen -ls | awk -vFS=\'\t|[.]\' \'/ ' + package + '/ {system("screen -S "$2" -X quit")}\' '
+        cmd = 'screen -ls | awk -vFS=\'\\t|[.]\' \'/ ' + package + '/ {system("screen -S "$2" -X quit")}\' '
 
         #cmd = 'screen -X -S '+ package + ' kill'
 
