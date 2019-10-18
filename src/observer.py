@@ -63,7 +63,7 @@ class Observer:
 
         self.current_system_diagnostics = ''
 
-        self.set_mode_on = False
+        self.startup_mode = True
 
         self.update_system_on = False
 
@@ -117,7 +117,7 @@ class Observer:
 
     def get_system_info(self):
 
-        if self.count > 1:
+        if self.count > 0:
 
             self.update_system_info()
 
@@ -147,9 +147,18 @@ class Observer:
 
                 self.current_system_diagnostics = 'system healthy'
 
+            self.count += 1
+
         else:
 
-            self.current_system_diagnostics = 'switching modes...'
+            if self.startup_mode:
+                
+                self.current_system_diagnostics = 'starting up'
+
+            else:
+                
+                self.current_system_diagnostics = 'switching modes...'
+
 
         return (self.current_system_mode, self.current_system_diagnostics)
 
