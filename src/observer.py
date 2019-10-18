@@ -71,6 +71,8 @@ class Observer:
 
         self.to_be_healed = []
 
+        self.count = 0
+
 
     def update_system_info(self, which_nodes = 'all'):
 
@@ -115,38 +117,46 @@ class Observer:
 
     def get_system_info(self):
 
-        self.update_system_info()
+        if self.count > 1:
 
-        print('Initial test: ')
+            self.update_system_info()
 
-        print(self.failed_nodes)
+            print('Initial test: ')
 
-        if self.failed_nodes != []:
-
-            self.heal_nodes()
-
-            self.update_system_info(which_nodes='healed')
-
-            print('After healing: ')
-            
             print(self.failed_nodes)
 
             if self.failed_nodes != []:
 
-                self.current_system_diagnostics = 'self-healing attempted but failed. faulty nodes: ' + str(self.failed_nodes)
+                self.heal_nodes()
+
+                self.update_system_info(which_nodes='healed')
+
+                print('After healing: ')
+                
+                print(self.failed_nodes)
+
+                if self.failed_nodes != []:
+
+                    self.current_system_diagnostics = 'self-healing attempted but failed. faulty nodes: ' + str(self.failed_nodes)
+
+                else:
+
+                    self.current_system_diagnostics = 'self-healing completed successfully. system healthy'
 
             else:
 
-                self.current_system_diagnostics = 'self-healing completed successfully. system healthy'
+                self.current_system_diagnostics = 'system healthy'
 
         else:
 
-            self.current_system_diagnostics = 'system healthy'
+            self.current_system_diagnostics = 'switching modes...'
 
         return (self.current_system_mode, self.current_system_diagnostics)
 
 
     def set_system_mode(self, new_mode):
+
+        self.count = 0
 
         self.current_system_mode = new_mode
 
@@ -158,6 +168,8 @@ class Observer:
 
 
     def system_reset(self):
+
+        self.count = 0
 
         self.manager.restart_stack(self.common_nodes)
 
