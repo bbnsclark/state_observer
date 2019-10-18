@@ -158,6 +158,8 @@ class Observer:
                 self.current_system_diagnostics = 'switching modes...'
                 
         self.count += 1
+
+        self.startup_mode = False
         
         return (self.current_system_mode, self.current_system_diagnostics)
 
@@ -178,6 +180,8 @@ class Observer:
     def system_reset(self):
 
         self.count = 0
+        
+        self.startup_mode = True
 
         self.manager.restart_stack(self.common_nodes)
 
