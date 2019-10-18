@@ -150,16 +150,11 @@ class Observer:
 
         self.current_system_mode = new_mode
 
+        self.manager.stop_stack(self.system_nodes[self.current_system_mode])
+
+        self.manager.start_stack(self.system_nodes[new_mode])
+
         return 'mode set to: ' + str(self.current_system_mode)
-
-        # # now, blocking updates until new mode is set
-        # self.set_mode_on = True
-
-        # self.manager.stop_stack(self.system_nodes[self.current_system_mode])
-
-        # self.manager.start_stack(self.system_nodes[new_mode])
-
-        # self.set_mode_on = False
 
 
     def system_reset(self):
