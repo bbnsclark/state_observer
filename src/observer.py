@@ -162,9 +162,9 @@ class Observer:
 
         self.count = 0
 
-        self.current_system_mode = new_mode
-
         self.manager.stop_stack(self.system_nodes[self.current_system_mode])
+
+        self.current_system_mode = new_mode
 
         self.manager.start_stack(self.system_nodes[new_mode])
 
