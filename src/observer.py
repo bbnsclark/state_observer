@@ -112,7 +112,7 @@ class Observer:
 
         print(self.to_be_healed)
 
-        # self.manager.restart_stack(self.to_be_healed)
+        self.manager.restart_stack(self.to_be_healed)
 
 
     def get_system_info(self):
