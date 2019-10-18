@@ -117,7 +117,7 @@ class Observer:
 
     def get_system_info(self):
 
-        if self.count > 0:
+        if self.count > 1:
 
             self.update_system_info()
 
