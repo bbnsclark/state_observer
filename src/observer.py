@@ -67,64 +67,73 @@ class Observer:
 
         self.update_system_on = False
 
+        self.failed_nodes = []
 
-    def update_system_info(self):
+        self.to_be_healed = []
 
-        current_nodes = self.common_nodes + self.system_nodes[self.current_system_mode]
+
+    def update_system_info(self, which_nodes = 'all'):
+
+        if which_nodes == 'all':
+
+            current_nodes = self.common_nodes + self.system_nodes[self.current_system_mode]
+
+        elif which_nodes == 'healed':
+
+            current_nodes = self.to_be_healed
 
         self.failed_nodes = []
 
-        # during mode change, we pause this service...
-        if self.set_mode_on:
+        # checking node health
+        for node in current_nodes:
 
-            self.current_system_diagnostics = 'awaiting mode change...'
+            try:
 
-        else:
+                rospy.wait_for_message(node['topic'], node['topic_type'], node['timeout'])
 
-            # checking node health
-            for node in current_nodes:
+            except:
 
-                try:
-
-                    rospy.wait_for_message(node['topic'], node['topic_type'], node['timeout'])
-
-                except:
-
-                    self.failed_nodes.append(node['name'])
+                self.failed_nodes.append(node['name'])
 
 
     def heal_nodes(self):
 
-        to_be_healed = {k:v for k,v in NODES.items() if k in self.failed_nodes}.values()
+        self.to_be_healed = {k:v for k,v in NODES.items() if k in self.failed_nodes}.values()
 
-        self.manager.restart_stack(to_be_healed)
+        self.manager.restart_stack(self.to_be_healed)
 
 
     def get_system_info(self):
 
-        self.update_system_on = True
+        if self.set_mode_on:
 
-        self.update_system_info()
+            self.current_system_diagnostics = 'changing mode'
 
-        if self.failed_nodes != []:
+        else:
 
-            self.heal_nodes()
+            self.update_system_on = True
 
             self.update_system_info()
 
             if self.failed_nodes != []:
 
-                self.current_system_diagnostics = 'self-healing attempted but failed. faulty nodes: ' + str(self.failed_nodes)
+                self.heal_nodes()
+
+                self.update_system_info(which_nodes='healed')
+
+                if self.failed_nodes != []:
+
+                    self.current_system_diagnostics = 'self-healing attempted but failed. faulty nodes: ' + str(self.failed_nodes)
+
+                else:
+
+                    self.current_system_diagnostics = 'self-healing completed successfully. system healthy'
 
             else:
 
-                self.current_system_diagnostics = 'self-healing completed. system healthy'
-
-        else:
-
-            self.current_system_diagnostics = 'system healthy'
-            
-        self.update_system_on = False
+                self.current_system_diagnostics = 'system healthy'
+                
+            self.update_system_on = False
 
         return (self.current_system_mode, self.current_system_diagnostics)
 
