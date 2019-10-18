@@ -127,6 +127,10 @@ class Observer:
 
             thres = 3
 
+        else:
+
+            thres = 0
+
         if self.count > thres:
 
             self.update_system_info()
