@@ -74,6 +74,8 @@ class Observer:
 
     def update_system_info(self, which_nodes = 'all'):
 
+        self.failed_nodes = []
+
         if which_nodes == 'all':
 
             current_nodes = self.common_nodes + self.system_nodes[self.current_system_mode]
@@ -81,8 +83,6 @@ class Observer:
         elif which_nodes == 'healed':
 
             current_nodes = self.to_be_healed
-
-        self.failed_nodes = []
 
         # checking node health
         for node in current_nodes:
@@ -158,12 +158,12 @@ class Observer:
 
     def set_system_mode(self, new_mode):
 
+        # wait for the system to complete updating its status
+        while self.update_system_on:
+
+            time.sleep(0.25)
+
         self.current_system_mode = new_mode
-
-        # # wait for the system to complete updating its status
-        # while self.update_system_on:
-
-        #     time.sleep(0.25)
 
         # # now, blocking updates until new mode is set
         # self.set_mode_on = True
