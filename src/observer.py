@@ -117,6 +117,8 @@ class Observer:
 
     def get_system_info(self):
 
+        self.update_system_on = True
+
         if self.current_system_mode == 'inertial':
             
             thres = 1
@@ -162,6 +164,10 @@ class Observer:
         self.count += 1
 
         self.startup_mode = False
+
+        self.update_system_on = False
+
+        time.sleep(1.0)
         
         return (self.current_system_mode, self.current_system_diagnostics)
 
@@ -169,6 +175,10 @@ class Observer:
     def set_system_mode(self, new_mode):
 
         self.count = 0
+
+        while self.update_system_on:
+
+            time.sleep(0.25)
 
         self.manager.stop_stack(self.system_nodes[self.current_system_mode])
 
