@@ -115,8 +115,6 @@ class Observer:
 
     def get_system_info(self):
 
-        self.update_system_on = True
-
         self.update_system_info()
 
         print('Initial test: ')
@@ -144,8 +142,6 @@ class Observer:
         else:
 
             self.current_system_diagnostics = 'system healthy'
-            
-        self.update_system_on = False
 
         return (self.current_system_mode, self.current_system_diagnostics)
 
