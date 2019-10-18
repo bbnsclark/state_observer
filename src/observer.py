@@ -156,21 +156,21 @@ class Observer:
 
     def set_system_mode(self, new_mode):
 
-        # wait for the system to complete updating its status
-        while self.update_system_on:
-
-            time.sleep(0.25)
-
-        # now, blocking updates until new mode is set
-        self.set_mode_on = True
-
-        self.manager.stop_stack(self.system_nodes[self.current_system_mode])
-
         self.current_system_mode = new_mode
 
-        self.manager.start_stack(self.system_nodes[new_mode])
+        # # wait for the system to complete updating its status
+        # while self.update_system_on:
 
-        self.set_mode_on = False
+        #     time.sleep(0.25)
+
+        # # now, blocking updates until new mode is set
+        # self.set_mode_on = True
+
+        # self.manager.stop_stack(self.system_nodes[self.current_system_mode])
+
+        # self.manager.start_stack(self.system_nodes[new_mode])
+
+        # self.set_mode_on = False
 
 
     def system_reset(self):
