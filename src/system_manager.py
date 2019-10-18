@@ -28,11 +28,11 @@ class SystemManager:
 
         self.stop_package(package)
 
-        time.sleep(1)
+        time.sleep(0.5)
 
         self.start_package(package, script)
 
-        time.sleep(1)
+        time.sleep(0.25)
 
 
     def check_package(self, pkg):
