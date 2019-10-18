@@ -99,7 +99,7 @@ class Observer:
 
             else:
 
-                if self.manager.check_stack(node['name']):
+                if self.manager.check_package(node['name']):
 
                     self.failed_nodes.append(node['name'])
 
