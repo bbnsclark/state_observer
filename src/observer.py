@@ -106,9 +106,9 @@ class Observer:
 
     def heal_nodes(self):
 
-        pass
+        self.to_be_healed = {k:v for k,v in NODES.items() if k in self.failed_nodes}.values()
 
-        # self.to_be_healed = {k:v for k,v in NODES.items() if k in self.failed_nodes}.values()
+        print(self.to_be_healed)
 
         # self.manager.restart_stack(self.to_be_healed)
 
