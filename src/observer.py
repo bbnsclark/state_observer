@@ -51,7 +51,7 @@ class Observer:
 
         self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'avoid_inertial']}.values()
 
-        self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver', 'gps_conv', 'gps_init', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global']}.values()
+        self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global']}.values()
 
         self.system_states = ['idle', 'broadcasting', 'fault']
 
@@ -64,6 +64,8 @@ class Observer:
         self.current_system_diagnostics = ''
 
         self.set_mode_on = False
+
+        self.update_system_on = False
 
         self.self_healing_required = False
 
@@ -78,6 +80,8 @@ class Observer:
         if self.set_mode_on:
 
             self.current_system_diagnostics = 'awaiting mode change...'
+
+            self.self_healing_required = False
 
         else:
 
@@ -117,6 +121,8 @@ class Observer:
 
     def get_system_info(self):
 
+        self.update_system_on = True
+
         self.update_system_info()
 
         if self.self_healing_required:
@@ -143,12 +149,19 @@ class Observer:
 
             self.current_system_diagnostics = 'system healthy'
             
+        self.update_system_on = False
 
         return (self.current_system_mode, self.current_system_diagnostics)
 
 
     def set_system_mode(self, new_mode):
 
+        # wait for the system to complete updating its status
+        while self.update_system_on:
+
+            time.sleep(0.5)
+
+        # now, blocking updates until new mode is set
         self.set_mode_on = True
 
         self.manager.stop_stack(self.system_nodes[self.current_system_mode])
