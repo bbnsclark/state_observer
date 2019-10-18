@@ -67,47 +67,30 @@ class Observer:
 
         self.update_system_on = False
 
-        self.self_healing_required = False
-
-        self.self_healing_attempted = False
-
 
     def update_system_info(self):
 
         current_nodes = self.common_nodes + self.system_nodes[self.current_system_mode]
+
+        self.failed_nodes = []
 
         # during mode change, we pause this service...
         if self.set_mode_on:
 
             self.current_system_diagnostics = 'awaiting mode change...'
 
-            self.self_healing_required = False
-
         else:
 
-            # first we'll check if there are any missing nodes in the network
-            self.failed_nodes = self.manager.check_stack(current_nodes)    
-
-            # if all nodes are up, we need to make sure topics are been broadcasted properly
+            # checking node health
             for node in current_nodes:
 
-                if node['name'] != 'gps_init':
+                try:
 
-                    try:
+                    rospy.wait_for_message(node['topic'], node['topic_type'], node['timeout'])
 
-                        rospy.wait_for_message(node['topic'], node['topic_type'], node['timeout'])
+                except:
 
-                    except:
-
-                        self.failed_nodes.append(node['name'])
-
-            if self.failed_nodes != []:
-
-                self.self_healing_required = True
-
-            else:
-
-                self.self_healing_required = False
+                    self.failed_nodes.append(node['name'])
 
 
     def heal_nodes(self):
@@ -116,8 +99,6 @@ class Observer:
 
         self.manager.restart_stack(to_be_healed)
 
-        self.self_healing_attempted = True
-
 
     def get_system_info(self):
 
@@ -125,7 +106,7 @@ class Observer:
 
         self.update_system_info()
 
-        if self.self_healing_required:
+        if self.failed_nodes != []:
 
             self.heal_nodes()
 
@@ -133,17 +114,11 @@ class Observer:
 
             if self.failed_nodes != []:
 
-                self.current_system_diagnostics = 'self-healing failed. faulty nodes: ' + str(self.failed_nodes)
+                self.current_system_diagnostics = 'self-healing attempted but failed. faulty nodes: ' + str(self.failed_nodes)
 
             else:
 
                 self.current_system_diagnostics = 'self-healing completed. system healthy'
-
-                self.self_healing_attempted = False
-
-        elif self.failed_nodes != []:
-
-            self.current_system_diagnostics = 'faulty nodes: ' + str(self.failed_nodes)
 
         else:
 
@@ -159,14 +134,12 @@ class Observer:
         # wait for the system to complete updating its status
         while self.update_system_on:
 
-            time.sleep(0.5)
+            time.sleep(0.25)
 
         # now, blocking updates until new mode is set
         self.set_mode_on = True
 
         self.manager.stop_stack(self.system_nodes[self.current_system_mode])
-
-        time.sleep(3.0)
 
         self.current_system_mode = new_mode
 
