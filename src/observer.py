@@ -106,9 +106,11 @@ class Observer:
 
     def heal_nodes(self):
 
-        self.to_be_healed = {k:v for k,v in NODES.items() if k in self.failed_nodes}.values()
+        pass
 
-        self.manager.restart_stack(self.to_be_healed)
+        # self.to_be_healed = {k:v for k,v in NODES.items() if k in self.failed_nodes}.values()
+
+        # self.manager.restart_stack(self.to_be_healed)
 
 
     def get_system_info(self):
