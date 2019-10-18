@@ -117,7 +117,13 @@ class Observer:
 
     def get_system_info(self):
 
-        thres = 3
+        if self.current_system_mode == 'inertial':
+            
+            thres = 1
+
+        elif self.current_system_mode == 'global':
+
+            thres = 3
 
         if self.count > thres:
 
