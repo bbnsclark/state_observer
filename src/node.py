@@ -67,9 +67,7 @@ class Node:
 
         if msg.cmd == 'set':
 
-            self.observer.set_system_mode(msg.target_mode)
-
-            _, reply = self.observer.get_system_info()
+            reply = self.observer.set_system_mode(msg.target_mode)
 
         elif msg.cmd == 'reset':
 

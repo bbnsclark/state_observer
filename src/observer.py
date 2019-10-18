@@ -165,6 +165,8 @@ class Observer:
 
         self.current_system_mode = new_mode
 
+        return 'mode set to :' + str(self.current_system_mode)
+
         # # now, blocking updates until new mode is set
         # self.set_mode_on = True
 
