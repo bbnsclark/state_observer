@@ -147,8 +147,6 @@ class Observer:
 
                 self.current_system_diagnostics = 'system healthy'
 
-            self.count += 1
-
         else:
 
             if self.startup_mode:
@@ -158,8 +156,9 @@ class Observer:
             else:
                 
                 self.current_system_diagnostics = 'switching modes...'
-
-
+                
+        self.count += 1
+        
         return (self.current_system_mode, self.current_system_diagnostics)
 
 
