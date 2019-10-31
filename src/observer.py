@@ -125,7 +125,7 @@ class Observer:
 
         elif self.current_system_mode == 'global':
 
-            thres = 3
+            thres = 1
 
         else:
 
@@ -182,7 +182,7 @@ class Observer:
 
         while self.update_system_on:
 
-            time.sleep(0.25)
+            time.sleep(0.5)
 
         self.manager.stop_stack(self.system_nodes[self.current_system_mode])
 
