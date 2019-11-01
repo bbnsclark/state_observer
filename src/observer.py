@@ -28,6 +28,7 @@ NODES = {
     'icp':{'name': 'icp', 'topic': '/odom_lidar', 'script': 'start_lidar_icp.sh', 'method': 'topic', 'topic_type': Odometry, 'timeout': 5.0 },
     'ekf_inertial': {'name': 'ekf_inertial', 'topic': '/odom_inertial', 'script': 'start_ekf_inertial.sh', 'method': 'topic', 'topic_type': Odometry, 'timeout': 5.0 },
     'map_inertial': {'name': 'map_inertial', 'topic': '/map', 'script': 'start_map_inertial.sh', 'method': 'topic', 'topic_type': OccupancyGrid, 'timeout': 2.0 },
+    'map_local': {'name': 'map_local', 'topic': '/map_pose', 'script': 'start_map_localization.sh', 'method': 'topic', 'topic_type': PoseStamped, 'timeout': 2.0 },
     'nav_inertial': {'name':'nav_inertial', 'topic':'/MOVE_INERTIAL/local_costmap/costmap', 'script':'start_nav_inertial.sh', 'method': 'topic', 'topic_type': OccupancyGrid, 'timeout': 5.0 },
     'gps_driver': {'name': 'gps_driver', 'topic': '/gps_fix', 'script': 'start_gps_driver.sh', 'method': 'topic', 'topic_type': GPSFix, 'timeout': 5.0 },
     'gps_conv': {'name': 'gps_conv', 'topic': '/gps_navsat', 'script': 'start_gps_converter.sh', 'method': 'topic', 'topic_type': NavSatFix, 'timeout': 5.0},
@@ -49,7 +50,7 @@ class Observer:
 
         self.common_nodes = {k:v for k,v in NODES.items() if k in ['imu', 'drive', 'icp', 'ekf_inertial', 'lidar', 'realsense']}.values()
 
-        self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'avoid_inertial']}.values()
+        self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'avoid_inertial', 'map_local']}.values()
 
         self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver','gps_conv', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global']}.values()
 
