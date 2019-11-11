@@ -40,6 +40,8 @@ NODES = {
     'control_global': {'name': 'control_global', 'topic': '/controller_check', 'script': 'start_control_global.sh', 'method': 'topic', 'topic_type': Float64, 'timeout': 5.0 },
     'avoid_inertial': {'name': 'avoid_inertial', 'topic': '/obstacles', 'script': 'start_avoidance_inertial.sh', 'method': 'node', 'topic_type': PointCloud2, 'timeout': 5.0 },
     'avoid_global': {'name': 'avoid_global', 'topic': '/obstacles', 'script': 'start_avoidance_global.sh', 'method': 'node', 'topic_type': PointCloud2, 'timeout': 5.0 }
+    'nav_trans': {'name': 'nav_trans', 'topic': '/MOVE_TRANS/local_costmap/costmap', 'script': 'start_nav_trans.sh', 'method': 'topic', 'topic_type': OccupancyGrid, 'timeout': 5.0 }
+    
 }
 
 class Observer:
@@ -50,15 +52,17 @@ class Observer:
 
         self.common_nodes = {k:v for k,v in NODES.items() if k in ['imu', 'drive', 'icp', 'ekf_inertial', 'lidar', 'realsense']}.values()
 
+        self.transition_nodes = {k:v for k,v in NODES.items() if k in ['nav_trans']}.values()
+
         self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'avoid_inertial', 'map_local']}.values()
 
         self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver','gps_conv', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global']}.values()
 
         self.system_states = ['idle', 'broadcasting', 'fault']
 
-        self.system_modes = ['', 'inertial', 'global']
+        self.system_modes = ['', 'inertial', 'global', 'transition']
 
-        self.system_nodes = {'': [], 'inertial': self.inertial_nodes, 'global': self.global_nodes}
+        self.system_nodes = {'': [], 'inertial': self.inertial_nodes, 'global': self.global_nodes, 'transition': self.transition_nodes}
 
         self.current_system_mode = ''
 
