@@ -52,7 +52,7 @@ class Observer:
 
         self.common_nodes = {k:v for k,v in NODES.items() if k in ['imu', 'drive', 'icp', 'ekf_inertial', 'lidar', 'realsense']}.values()
 
-        self.transition_nodes = {k:v for k,v in NODES.items() if k in ['nav_trans']}.values()
+        self.transition_nodes = {k:v for k,v in NODES.items() if k in ['nav_trans', 'avoid_inertial']}.values()
 
         self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'avoid_inertial', 'map_local']}.values()
 
