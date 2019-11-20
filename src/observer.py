@@ -22,7 +22,7 @@ from geometry_msgs.msg import Quaternion, Twist, PoseStamped
 NODES = {
 
     'imu': {'name': 'imu', 'topic': '/imu', 'script': 'start_imu.sh', 'method': 'topic', 'topic_type': Imu, 'timeout': 15.0 },
-    'drive': {'name': 'drive', 'topic': '/odom_wheel', 'script': 'start_drive.sh', 'method': 'topic', 'topic_type': Odometry, 'timeout': 5.0 },
+    'drive': {'name': 'drive', 'topic': '/odom_wheel', 'script': 'start_drive.sh', 'method': 'topic', 'topic_type': Odometry, 'timeout': 10.0 },
     'lidar': {'name': 'lidar', 'topic': '/scan', 'tag': '/LIDAR', 'script': 'start_lidar.sh', 'method': 'topic', 'topic_type': LaserScan, 'timeout': 5.0 },
     'realsense': {'name': 'realsense', 'topic': '/camera/depth/color/points', 'script': 'start_realsense.sh', 'method': 'topic', 'topic_type': PointCloud2, 'timeout': 5.0},
     'icp':{'name': 'icp', 'topic': '/odom_lidar', 'script': 'start_lidar_icp.sh', 'method': 'topic', 'topic_type': Odometry, 'timeout': 5.0 },
