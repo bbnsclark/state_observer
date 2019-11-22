@@ -56,7 +56,7 @@ class Observer:
 
         self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'avoid_inertial', 'map_local']}.values()
 
-        self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver','gps_conv', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global']}.values()
+        self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver','gps_conv', 'nav_global', 'control_global', 'avoid_global']}.values()
 
         self.system_states = ['idle', 'broadcasting', 'fault']
 
