@@ -212,7 +212,7 @@ class Observer:
 
         elif self.current_system_mode == 'global':
 
-            self.manager.restart_stack(self.inertial_nodes)
+            self.manager.restart_stack(self.global_nodes)
 
         elif self.current_system_mode == 'transition':
 
