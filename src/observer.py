@@ -126,7 +126,7 @@ class Observer:
 
         thres = 1
 
-        if self.count > thres:
+        if self.count > thres and self.mode_change_on != True:
 
             self.update_system_info()
 
@@ -175,6 +175,8 @@ class Observer:
 
         self.count = 0
 
+        self.mode_change_on = True
+
         while self.update_system_on:
 
             time.sleep(0.5)
@@ -184,6 +186,8 @@ class Observer:
         self.current_system_mode = new_mode
 
         self.manager.start_stack(self.system_nodes[new_mode])
+
+        self.mode_change_on = False
 
         return 'mode set to: ' + str(self.current_system_mode)
 
