@@ -168,7 +168,7 @@ class Observer:
 
         else:
 
-            self.current_system_diagnostics = 'transition mode'
+            self.current_system_diagnostics = 'switching modes'
                 
         self.count += 1
 
@@ -210,9 +210,13 @@ class Observer:
 
             self.manager.restart_stack(self.inertial_nodes)
 
-        else:
+        elif self.current_system_mode == 'global':
 
-            self.manager.restart_stack(self.global_nodes)
+            self.manager.restart_stack(self.inertial_nodes)
+
+        elif self.current_system_mode == 'transition':
+
+            self.manager.restart_stack(self.transition_nodes)
 
             
 
