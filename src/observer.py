@@ -126,11 +126,11 @@ class Observer:
 
         if self.current_system_mode == 'inertial':
             
-            thres = 1
+            thres = 0
 
         elif self.current_system_mode == 'global':
 
-            thres = 1
+            thres = 0
 
         else:
 
