@@ -124,17 +124,7 @@ class Observer:
 
         self.update_system_on = True
 
-        if self.current_system_mode == 'inertial':
-            
-            thres = 0
-
-        elif self.current_system_mode == 'global':
-
-            thres = 0
-
-        else:
-
-            thres = 0
+        thres = 1
 
         if self.count > thres:
 
