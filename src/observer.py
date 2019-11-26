@@ -124,11 +124,11 @@ class Observer:
 
     def get_system_info(self):
 
-        self.update_system_on = True
-
         thres = 1
 
         if self.count > thres and self.mode_change_on != True:
+
+            self.update_system_on = True
 
             self.update_system_info()
 
@@ -168,7 +168,7 @@ class Observer:
 
         self.update_system_on = False
 
-        time.sleep(1.0)
+        time.sleep(0.25)
         
         return (self.current_system_mode, self.current_system_diagnostics)
 
