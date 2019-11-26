@@ -124,11 +124,11 @@ class Observer:
 
     def get_system_info(self):
 
+        self.update_system_on = True
+
         thres = 1
 
         if self.count > thres:
-
-            self.update_system_on = True
 
             self.update_system_info()
 
