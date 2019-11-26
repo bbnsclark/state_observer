@@ -72,6 +72,8 @@ class Observer:
 
         self.update_system_on = False
 
+        self.mode_change_on = False
+
         self.failed_nodes = []
 
         self.to_be_healed = []
