@@ -54,7 +54,7 @@ class SystemManager:
 
                 self.start_package(pkg['name'], pkg['script'])
 
-                time.sleep(0.25)
+                time.sleep(2.0)
 
 
     def restart_stack(self, pkg_list):
@@ -65,7 +65,7 @@ class SystemManager:
 
                 self.restart_package(pkg['name'], pkg['script'])
 
-                time.sleep(0.25)
+                time.sleep(2.0)
 
 
     def stop_stack(self, pkg_list):
@@ -76,7 +76,7 @@ class SystemManager:
 
                 self.stop_package(pkg['name'])
 
-                time.sleep(0.25) 
+                time.sleep(1.0) 
 
     def check_stack(self, pkg_list):
 
