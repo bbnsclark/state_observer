@@ -41,6 +41,7 @@ NODES = {
     'avoid_inertial': {'name': 'avoid_inertial', 'topic': '/obstacles', 'script': 'start_avoidance_inertial.sh', 'method': 'node', 'topic_type': PointCloud2, 'timeout' : 5.0 },
     'avoid_global': {'name': 'avoid_global', 'topic': '/obstacles', 'script': 'start_avoidance_global.sh', 'method': 'node', 'topic_type': PointCloud2, 'timeout' : 5.0 },
     'nav_trans': {'name': 'nav_trans', 'topic': '/MOVE_TRANS/local_costmap/costmap', 'script': 'start_nav_trans.sh', 'method': 'topic', 'topic_type': OccupancyGrid, 'timeout' : 5.0 }
+    'explore': {'name': 'explore', 'topic': '/MOVE_TRANS/local_costmap/costmap', 'script': 'start_exploration_server.sh', 'method': 'node', 'topic_type': OccupancyGrid, 'timeout' : 5.0 }
     
 }
 
@@ -54,7 +55,7 @@ class Observer:
 
         self.transition_nodes = {k:v for k,v in NODES.items() if k in ['nav_trans', 'icp']}.values()
 
-        self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'icp', 'nav_inertial', 'avoid_inertial', 'map_local']}.values()
+        self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'icp', 'nav_inertial', 'avoid_inertial', 'map_local', 'explore']}.values()
 
         self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver', 'gps_conv', 'nav_global', 'control_global', 'avoid_global']}.values()
 
