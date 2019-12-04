@@ -40,7 +40,7 @@ NODES = {
     'control_global': {'name': 'control_global', 'topic': '/controller_check', 'script': 'start_control_global.sh', 'method': 'topic', 'topic_type': Float64, 'timeout' : 5.0 },
     'avoid_inertial': {'name': 'avoid_inertial', 'topic': '/obstacles', 'script': 'start_avoidance_inertial.sh', 'method': 'node', 'topic_type': PointCloud2, 'timeout' : 5.0 },
     'avoid_global': {'name': 'avoid_global', 'topic': '/obstacles', 'script': 'start_avoidance_global.sh', 'method': 'node', 'topic_type': PointCloud2, 'timeout' : 5.0 },
-    'nav_trans': {'name': 'nav_trans', 'topic': '/MOVE_TRANS/local_costmap/costmap', 'script': 'start_nav_trans.sh', 'method': 'topic', 'topic_type': OccupancyGrid, 'timeout' : 5.0 }
+    'nav_trans': {'name': 'nav_trans', 'topic': '/MOVE_TRANS/local_costmap/costmap', 'script': 'start_nav_trans.sh', 'method': 'topic', 'topic_type': OccupancyGrid, 'timeout' : 5.0 },
     'explore': {'name': 'explore', 'topic': '/MOVE_TRANS/local_costmap/costmap', 'script': 'start_exploration_server.sh', 'method': 'node', 'topic_type': OccupancyGrid, 'timeout' : 5.0 }
     
 }
