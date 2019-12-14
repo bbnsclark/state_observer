@@ -2,6 +2,7 @@
 
 import os
 import time
+from websocket import create_connection
 from system_manager import SystemManager
 
 import rospy
@@ -41,7 +42,8 @@ NODES = {
     'avoid_inertial': {'name': 'avoid_inertial', 'topic': '/obstacles', 'script': 'start_avoidance_inertial.sh', 'method': 'node', 'topic_type': PointCloud2, 'timeout' : 5.0 },
     'avoid_global': {'name': 'avoid_global', 'topic': '/obstacles', 'script': 'start_avoidance_global.sh', 'method': 'node', 'topic_type': PointCloud2, 'timeout' : 5.0 },
     'nav_trans': {'name': 'nav_trans', 'topic': '/MOVE_TRANS/local_costmap/costmap', 'script': 'start_nav_trans.sh', 'method': 'topic', 'topic_type': OccupancyGrid, 'timeout' : 5.0 },
-    'explore': {'name': 'explore', 'topic': '/MOVE_TRANS/local_costmap/costmap', 'script': 'start_exploration_server.sh', 'method': 'node', 'topic_type': OccupancyGrid, 'timeout' : 5.0 }
+    'explore': {'name': 'explore', 'topic': '/MOVE_TRANS/local_costmap/costmap', 'script': 'start_exploration_server.sh', 'method': 'node', 'topic_type': OccupancyGrid, 'timeout' : 5.0 },
+    'rosbridge': {'name': 'rosbridge', 'topic': 9090, 'script': 'start_rosbridge.sh', 'method': 'websocket', 'topic_type': 'port', 'timeout' : 5.0 }
     
 }
 
@@ -51,7 +53,7 @@ class Observer:
 
         self.manager = SystemManager()
 
-        self.common_nodes = {k:v for k,v in NODES.items() if k in ['imu', 'drive', 'ekf_inertial', 'lidar', 'realsense']}.values()
+        self.common_nodes = {k:v for k,v in NODES.items() if k in ['imu', 'drive', 'ekf_inertial', 'lidar', 'realsense', 'rosbridge']}.values()
 
         self.transition_nodes = {k:v for k,v in NODES.items() if k in ['nav_trans', 'icp']}.values()
 
@@ -107,11 +109,27 @@ class Observer:
 
                     self.failed_nodes.append(node['name'])
 
-            else:
+            elif node['method'] == 'node':
 
                 if self.manager.check_package(node['name']):
 
                     self.failed_nodes.append(node['name'])
+
+            elif node['method'] == 'websocket':
+
+                try: 
+
+                    self.ws = create_connection("ws://localhost:9090")
+
+                    self.self.ws.send("ping_websocket")
+
+                except:
+
+                    self.failed_nodes.append(node['name'])
+
+            elif node['method'] == 'none':
+
+                pass
 
 
     def heal_nodes(self):
