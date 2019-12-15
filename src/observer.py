@@ -119,9 +119,7 @@ class Observer:
 
                 try: 
 
-                    self.ws = create_connection("ws://localhost:9090")
-
-                    self.ws.settimeout(10.0)
+                    self.ws = create_connection("ws://localhost:9090", timeout = 5.0)
 
                     self.ws.send("ping_websocket")
 
