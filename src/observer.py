@@ -121,7 +121,7 @@ class Observer:
 
                     self.ws = create_connection("ws://localhost:9090")
 
-                    time.sleep(5.0)
+                    self.ws.settimeout(10.0)
 
                     self.self.ws.send("ping_websocket")
 
