@@ -123,7 +123,7 @@ class Observer:
 
                     self.ws.settimeout(10.0)
 
-                    self.self.ws.send("ping_websocket")
+                    self.ws.send("ping_websocket")
 
                 except:
 
