@@ -12,7 +12,9 @@ class SystemManager:
 
     def start_package(self, package, script):
 
-        cmd = 'screen -d -m -S ' + package + ' /home/nvidia/rover/src/rover_launcher/bin/' + script 
+        cmd = 'screen -d -m -S ' + package + ' $HOME/rover/src/rover_launcher_sitl/bin/' + script 
+
+        print(cmd)
 
         os.system(cmd)
 
@@ -32,12 +34,12 @@ class SystemManager:
 
         self.start_package(package, script)
 
-        time.sleep(0.25)
+        time.sleep(5.0)
 
 
     def check_package(self, pkg):
 
-        if (subprocess.check_output('screen -ls', shell=True)).find(pkg) == -1:
+        if (subprocess.check_output('screen -ls', shell = True)).find(pkg) == -1:
     
             return True
 
@@ -54,8 +56,6 @@ class SystemManager:
 
                 self.start_package(pkg['name'], pkg['script'])
 
-                time.sleep(2.0)
-
 
     def restart_stack(self, pkg_list):
 
@@ -64,8 +64,6 @@ class SystemManager:
             for pkg in pkg_list:
 
                 self.restart_package(pkg['name'], pkg['script'])
-
-                time.sleep(2.0)
 
 
     def stop_stack(self, pkg_list):
@@ -76,7 +74,7 @@ class SystemManager:
 
                 self.stop_package(pkg['name'])
 
-                time.sleep(1.0) 
+                time.sleep(1) 
 
     def check_stack(self, pkg_list):
 
