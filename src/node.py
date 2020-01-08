@@ -5,7 +5,6 @@ import numpy as np
 from datetime import datetime
 from math import pi, cos, sin
 from observer import Observer
-from dronekit import connect, VehicleMode
 
 import tf
 import rospy
