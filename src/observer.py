@@ -22,35 +22,6 @@ from state_observer.srv import SetMode
 from state_observer.msg import Diagnostics
 from geometry_msgs.msg import Quaternion, Twist, PoseStamped
 
-# NODES = {
-
-#     'sitl': {'topic': '/odom_wheel', 'script': 'start_gazebo_sitl.sh', 'method': 'topic', 'topic_type': Odometry, 'timeout': 5.0 },
-#     'firmware': {'topic': '/odom_wheel', 'script': 'start_sitl_firmware.sh', 'method': 'node', 'topic_type': Odometry, 'timeout': 5.0 },
-#     'nav_sat': {'topic': '/odom_gps', 'script': 'start_nav_sat.sh', 'method': 'topic', 'topic_type': Odometry, 'timeout': 5.0 },
-#     'icp':{'topic': '/odom_lidar', 'script': 'start_lidar_icp.sh', 'method': 'topic', 'topic_type': Odometry, 'timeout': 5.0 },
-#     'ekf_inertial': {'topic': '/odom_inertial', 'script': 'start_ekf_inertial.sh', 'method': 'topic', 'topic_type': Odometry, 'timeout': 5.0 },
-#     'map_inertial': {'topic': '/map', 'script': 'start_map_inertial.sh', 'method': 'topic', 'topic_type': OccupancyGrid, 'timeout': 2.0 },
-#     'map_local': {'topic': '/map_pose', 'script': 'start_map_localization.sh', 'method': 'topic', 'topic_type': PoseStamped, 'timeout': 2.0 },
-#     'nav_inertial': {'topic':'/MOVE_INERTIAL/local_costmap/costmap', 'script':'start_nav_inertial.sh', 'method': 'topic', 'topic_type': OccupancyGrid, 'timeout': 5.0 },
-#     'gps_driver_gazebo': {'topic': '/gps_fix', 'script': 'start_gps_driver_gazebo.sh', 'method': 'topic', 'topic_type': GPSFix, 'timeout': 5.0 },
-#     'gps_driver_airsim': {'topic': '/gps_fix', 'script': 'start_gps_driver_airsim.sh', 'method': 'topic', 'topic_type': GPSFix, 'timeout': 5.0 },
-#     'gps_conv': {'topic': '/gps_navsat', 'script': 'start_gps_converter.sh', 'method': 'topic', 'topic_type': NavSatFix, 'timeout': 5.0},
-#     'gps_init': {'topic': '/local_xy_origin', 'script': 'start_gps_initializer.sh', 'method': 'topic', 'topic_type': PoseStamped, 'timeout': 5.0},
-#     'ekf_global': {'topic': '/odom_global', 'script': 'start_ekf_global.sh', 'method': 'topic', 'topic_type': Odometry, 'timeout': 5.0 },
-#     'nav_global': {'topic': '/MOVE_GLOBAL/local_costmap/costmap', 'script': 'start_nav_global.sh', 'method': 'topic', 'topic_type': OccupancyGrid, 'timeout': 5.0 },
-#     'map_global': {'topic': '/map_global', 'script': 'start_map_global.sh', 'method': 'topic', 'topic_type': OccupancyGrid, 'timeout': 5.0 },
-#     'control_global': {'topic': '/controller_check', 'script': 'start_control_global.sh', 'method': 'topic', 'topic_type': Float64, 'timeout': 5.0 },
-#     'avoid_inertial': {'topic': '/obstacles', 'script': 'start_avoidance_inertial.sh', 'method': 'node', 'topic_type': PointCloud2, 'timeout': 5.0 },
-#     'avoid_global': {'topic': '/obstacles', 'script': 'start_avoidance_global.sh', 'method': 'node', 'topic_type': PointCloud2, 'timeout': 5.0 },
-#     'nav_trans': {'topic': '/MOVE_TRANS/local_costmap/costmap', 'script': 'start_nav_trans.sh', 'method': 'topic', 'topic_type': OccupancyGrid, 'timeout': 5.0 },
-#     'rviz_inertial': {'topic': '', 'script': 'start_rviz_inertial.sh', 'method': 'none', 'topic_type': None, 'timeout': 5.0 },
-#     'rviz_trans': {'topic': '', 'script': 'start_rviz_transition.sh', 'method': 'none', 'topic_type': None, 'timeout': 5.0 },
-#     'rviz_global': {'topic': '', 'script': 'start_rviz_global.sh', 'method': 'none', 'topic_type': None, 'timeout': 5.0 },
-#     'explore': {'topic': '', 'script': 'start_exploration_server.sh', 'method': 'node', 'topic_type': None, 'timeout' : 5.0 },
-#     'rosbridge': {'name': 'rosbridge', 'topic': 9090, 'script': 'start_rosbridge.sh', 'method': 'websocket', 'topic_type': 'port', 'timeout' : 5.0 }
-    
-# }
-
 class Observer:
 
     def __init__(self):
