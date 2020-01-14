@@ -28,19 +28,19 @@ class Observer:
 
         self.manager = SystemManager()
             
-        is_sitl = rospy.get_param('~is_sitl', "False")
+        is_sitl = rospy.get_param('~is_sitl', 'False')
             
-        is_airsim = rospy.get_param('~is_airsim', "False")
+        is_airsim = rospy.get_param('~is_airsim', 'False')
 
         if is_sitl:
 
-            filename = 'states_sitl.yaml'
+            nodes_filename = 'nodes_sitl.yaml'
 
         else:
 
-            filename = 'states.yaml'
+            nodes_filename = 'nodes.yaml'
         
-        with open(sys.path[0] + '/../config/' + filename, 'r') as stream:
+        with open(sys.path[0] + '/../config/' + nodes_filename, 'r') as stream:
 
             NODES = yaml.load(stream)
 
@@ -50,7 +50,7 @@ class Observer:
 
             v['topic_type'] = eval(v['topic_type'])
 
-        if is_airsim:
+        if is_airsim == True:
 
             print("AirSim mode")
 
@@ -148,11 +148,11 @@ class Observer:
 
         self.update_system_on = True
 
+        self.update_system_info()
+
         if self.failed_nodes != []: 
 
             self.current_system_diagnostics = 'faulty nodes: ' + str(self.failed_nodes)
-
-            self.heal_nodes()
 
         else:
 
@@ -161,8 +161,6 @@ class Observer:
         self.startup_mode = False
 
         self.update_system_on = False
-
-        time.sleep(1.0)
         
         return (self.current_system_mode, self.current_system_diagnostics)
 
