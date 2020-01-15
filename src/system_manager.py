@@ -6,13 +6,17 @@ import subprocess
 
 class SystemManager:
 
-    def __init__(self):
+    def __init__(self, is_sitl = False):
 
-        pass
+        self.sitl = ''
+
+        if is_sitl:
+        
+            self.sitl = '_sitl'
 
     def start_package(self, package, script):
 
-        cmd = 'screen -d -m -S ' + package + ' $HOME/rover/src/rover_launcher_sitl/bin/' + script 
+        cmd = 'screen -d -m -S ' + package + ' $HOME/rover/src/rover_launcher' + self.sitl + '/bin/' + script 
 
         print(cmd)
 

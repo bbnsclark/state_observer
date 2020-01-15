@@ -26,7 +26,7 @@ class Observer:
 
     def __init__(self, is_sitl, is_airsim):
 
-        self.manager = SystemManager()
+        self.manager = SystemManager(is_sitl)
 
         if is_sitl:
 
