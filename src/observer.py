@@ -24,13 +24,9 @@ from geometry_msgs.msg import Quaternion, Twist, PoseStamped
 
 class Observer:
 
-    def __init__(self):
+    def __init__(self, is_sitl, is_airsim):
 
         self.manager = SystemManager()
-            
-        is_sitl = rospy.get_param('~is_sitl', 'False')
-            
-        is_airsim = rospy.get_param('~is_airsim', 'False')
 
         if is_sitl:
 
