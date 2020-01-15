@@ -50,23 +50,31 @@ class Observer:
 
             v['topic_type'] = eval(v['topic_type'])
 
-        if is_airsim == True:
+        if is_sitl == True:
 
-            print("AirSim mode")
-
-            self.common_nodes = {k:v for k,v in NODES.items() if k in ['firmware', 'icp', 'ekf_inertial']}.values()
-
-            self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_airsim', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'rviz_global']}.values()
-        
-        else:
-
-            print("Gazebo mode")
-
-            self.common_nodes = {k:v for k,v in NODES.items() if k in ['sitl', 'firmware', 'icp', 'ekf_inertial']}.values()
+            self.common_nodes = {k:v for k,v in NODES.items() if k in ['rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf_inertial']}.values()
 
             self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_gazebo','gps_conv', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'rviz_global']}.values()
 
-        self.transition_nodes = {k:v for k,v in NODES.items() if k in ['nav_trans', 'rviz_trans']}.values()
+        else:
+
+            if is_airsim == True:
+
+                print("AirSim mode")
+
+                self.common_nodes = {k:v for k,v in NODES.items() if k in ['firmware', 'ekf_inertial']}.values()
+
+                self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_airsim', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'rviz_global']}.values()
+            
+            else:
+
+                print("Gazebo mode")
+
+                self.common_nodes = {k:v for k,v in NODES.items() if k in ['sitl', 'firmware', 'ekf_inertial']}.values()
+
+                self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_gazebo','gps_conv', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'rviz_global']}.values()
+
+        self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'nav_trans', 'rviz_trans']}.values()
 
         self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'map_local', 'rviz_inertial', 'explore']}.values()
 
