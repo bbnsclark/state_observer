@@ -24,9 +24,9 @@ class Node:
 
     def __init__(self):
             
-        self.is_sitl = rospy.get_param('~is_sitl', 'False')
+        self.is_sitl = rospy.get_param('~is_sitl', False)
             
-        self.is_airsim = rospy.get_param('~is_airsim', 'False')
+        self.is_airsim = rospy.get_param('~is_airsim', False)
 
         self.observer = Observer(self.is_sitl, self.is_airsim)
 
