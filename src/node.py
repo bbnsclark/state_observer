@@ -28,7 +28,7 @@ class Node:
 
         rospy.init_node('STATE')
 
-        self.rate = 0.1
+        self.rate = 0.5
 
         self.pub_diag = rospy.Publisher('/system_diagnostics', Diagnostics, queue_size = 1)
 

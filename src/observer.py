@@ -56,7 +56,7 @@ class Observer:
 
             self.common_nodes = {k:v for k,v in NODES.items() if k in ['firmware', 'icp', 'ekf_inertial']}.values()
 
-            self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_airsim', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global', 'rviz_global']}.values()
+            self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_airsim', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'rviz_global']}.values()
         
         else:
 
@@ -64,11 +64,11 @@ class Observer:
 
             self.common_nodes = {k:v for k,v in NODES.items() if k in ['sitl', 'firmware', 'icp', 'ekf_inertial']}.values()
 
-            self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_gazebo','gps_conv', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global', 'rviz_global']}.values()
+            self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_gazebo','gps_conv', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'rviz_global']}.values()
 
-        self.transition_nodes = {k:v for k,v in NODES.items() if k in ['nav_trans', 'avoid_inertial', 'rviz_trans']}.values()
+        self.transition_nodes = {k:v for k,v in NODES.items() if k in ['nav_trans', 'rviz_trans']}.values()
 
-        self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'map_local', 'avoid_inertial', 'rviz_inertial', 'explore']}.values()
+        self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'map_local', 'rviz_inertial', 'explore']}.values()
 
         self.system_states = ['idle', 'broadcasting', 'fault']
 
@@ -167,10 +167,6 @@ class Observer:
 
     def set_system_mode(self, new_mode):
 
-        while self.update_system_on:
-
-            time.sleep(0.5)
-
         to_be_stopped = [x for x in self.system_modes if x != new_mode]
 
         for stack in to_be_stopped:
@@ -190,15 +186,7 @@ class Observer:
         
         self.startup_mode = True
 
-        self.manager.restart_stack(self.common_nodes)
-
-        if self.current_system_mode == 'inertial':
-
-            self.manager.restart_stack(self.inertial_nodes)
-
-        else:
-
-            self.manager.restart_stack(self.global_nodes)
+        self.manager.restart_stack(self.common_nodes + self.system_nodes[self.current_system_mode])
 
             
 
