@@ -36,8 +36,6 @@ class Node:
 
         self.pub_diag = rospy.Publisher('/system_diagnostics', Diagnostics, queue_size = 1)
 
-        self.pub_batt = rospy.Publisher('/battery', BatteryState, queue_size = 1)
-
         self.srv_cmd_state = rospy.Service('set_mode', SetMode, self.set_mode_callback)
 
         rospy.loginfo('Starting state observer...')
