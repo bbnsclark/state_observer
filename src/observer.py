@@ -52,11 +52,11 @@ class Observer:
 
             self.common_nodes = {k:v for k,v in NODES.items() if k in ['rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf_inertial']}.values()
 
-            self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_gazebo','gps_conv', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'rviz_global']}.values()
+            self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_gazebo','gps_conv', 'nav_sat', 'avoid_global','ekf_global', 'nav_global', 'control_global', 'rviz_global']}.values()
 
-            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'nav_trans']}.values()
+            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'avoid_inertial', 'nav_trans']}.values()
 
-            self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'map_local']}.values()
+            self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'avoid_inertial', 'map_local']}.values()
 
         else:
 
@@ -74,11 +74,11 @@ class Observer:
 
                 self.common_nodes = {k:v for k,v in NODES.items() if k in ['rosbridge', 'sitl', 'firmware', 'ekf_inertial']}.values()
 
-                self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_gazebo','gps_conv', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'rviz_global']}.values()
+                self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_gazebo','gps_conv', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global', 'rviz_global']}.values()
 
-            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'nav_trans', 'rviz_trans']}.values()
+            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'nav_trans', 'avoid_inertial', 'rviz_trans']}.values()
 
-            self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'map_local', 'rviz_inertial']}.values()
+            self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'avoid_inertial',  'nav_inertial', 'map_local', 'rviz_inertial']}.values()
 
         self.system_states = ['idle', 'broadcasting', 'fault']
 
