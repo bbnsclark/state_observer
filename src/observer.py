@@ -24,6 +24,23 @@ from geometry_msgs.msg import Quaternion, Twist, PoseStamped
 
 class Observer:
 
+    def adjust_keys_for_platform_suffix(self, dictionary):
+
+        for k,v in dictionary.items():
+            new_key = k + self.platform_suffix
+            print('Old key: ' + k + ', key with suffix: ' + new_key)
+            del dictionary[k]
+            dictionary[new_key] = v
+
+
+    def adjust_strings_for_platform_suffix(self, string_array):
+
+        result = []
+        for name in string_array:
+            result.append(name + self.platform_suffix)
+        return result
+
+
     def __init__(self, is_sitl, is_airsim):
 
         self.manager = SystemManager(is_sitl)
@@ -40,8 +57,14 @@ class Observer:
 
             NODES = yaml.load(stream)
 
+        # Add any key suffix (for multi-platform configurations)
+        self.platform_suffix = rospy.get_param('~platform_suffix', "")
+        print('platform_suffix = ' + self.platform_suffix)
+        self.adjust_keys_for_platform_suffix(NODES)
+
         for k,v in NODES.items():
                     
+            # Let all nodes know their names - which are their keys in the NODES map
             v['name'] = k
 
             v['topic_type'] = eval(v['topic_type'])
@@ -64,10 +87,26 @@ class Observer:
 
                 print("AirSim mode")
 
-                self.common_nodes = {k:v for k,v in NODES.items() if k in ['rosbridge', 'firmware', 'ekf_inertial']}.values()
+                common_node_names = ['firmware', 'ekf_inertial']
+                common_node_names = self.adjust_strings_for_platform_suffix(common_node_names)
 
-                self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_airsim', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'rviz_global']}.values()
-            
+                global_node_names = ['gps_driver_airsim', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global', 'rviz_global']
+                global_node_names = self.adjust_strings_for_platform_suffix(global_node_names)
+
+                print('Common node names: ')
+                print(common_node_names)
+
+                self.common_nodes = {k:v for k,v in NODES.items() if k in common_node_names}.values()
+                self.global_nodes = {k:v for k,v in NODES.items() if k in global_node_names}.values()
+
+                transition_node_names = ['icp', 'nav_trans', 'avoid_inertial', 'rviz_trans']
+                transition_node_names = self.adjust_strings_for_platform_suffix(transition_node_names)
+                self.transition_nodes = {k:v for k,v in NODES.items() if k in transition_node_names}.values()
+
+                inertial_node_names = ['icp', 'map_inertial', 'nav_inertial', 'map_local', 'avoid_inertial', 'rviz_inertial']
+                inertial_node_names = self.adjust_strings_for_platform_suffix(inertial_node_names)
+                self.inertial_nodes = {k:v for k,v in NODES.items() if k in inertial_node_names}.values()
+
             else:
 
                 print("Gazebo mode")
@@ -76,9 +115,9 @@ class Observer:
 
                 self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_gazebo','gps_conv', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global', 'rviz_global']}.values()
 
-            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'nav_trans', 'avoid_inertial', 'rviz_trans']}.values()
+                self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'nav_trans', 'avoid_inertial', 'rviz_trans']}.values()
 
-            self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'avoid_inertial',  'nav_inertial', 'map_local', 'rviz_inertial']}.values()
+                self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'avoid_inertial',  'nav_inertial', 'map_local', 'rviz_inertial']}.values()
 
         self.system_states = ['idle', 'broadcasting', 'fault']
 
