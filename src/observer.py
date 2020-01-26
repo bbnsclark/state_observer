@@ -103,7 +103,7 @@ class Observer:
                 transition_node_names = self.adjust_strings_for_platform_suffix(transition_node_names)
                 self.transition_nodes = {k:v for k,v in NODES.items() if k in transition_node_names}.values()
 
-                inertial_node_names = ['icp', 'map_inertial', 'nav_inertial', 'map_local', 'avoid_inertial', 'rviz_inertial']
+                inertial_node_names = ['explore', 'icp', 'map_inertial', 'nav_inertial', 'map_local', 'avoid_inertial', 'rviz_inertial']
                 inertial_node_names = self.adjust_strings_for_platform_suffix(inertial_node_names)
                 self.inertial_nodes = {k:v for k,v in NODES.items() if k in inertial_node_names}.values()
 
