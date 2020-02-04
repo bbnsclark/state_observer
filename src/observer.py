@@ -81,6 +81,8 @@ class Observer:
 
             self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'avoid_inertial', 'map_local']}.values()
 
+            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'nav_trans', 'avoid_inertial', 'rviz_trans']}.values()
+
         else:
 
             if is_airsim:
@@ -121,7 +123,7 @@ class Observer:
 
                 self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'avoid_inertial',  'nav_inertial', 'map_local', 'rviz_inertial']}.values()
 
-            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'nav_trans', 'avoid_inertial', 'rviz_trans']}.values()
+                self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'nav_trans', 'avoid_inertial', 'rviz_trans']}.values()
 
         self.system_states = ['idle', 'broadcasting', 'fault']
 
