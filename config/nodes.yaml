@@ -60,6 +60,13 @@
   'method': 'topic'
   'topic_type': GPSFix
   'timeout': 5.0
+
+'gps_driver':
+  'topic': '/gps_fix'
+  'script': 'start_gps_driver.sh'
+  'method': 'topic'
+  'topic_type': GPSFix
+  'timeout': 5.0
   
 'gps_driver_airsim':
   'topic': '/gps_fix'
