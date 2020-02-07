@@ -38,7 +38,7 @@ class SystemManager:
 
         self.start_package(package, script)
 
-        time.sleep(5.0)
+        time.sleep(0.5)
 
 
     def check_package(self, pkg):

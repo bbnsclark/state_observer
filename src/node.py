@@ -32,7 +32,7 @@ class Node:
 
         self.observer = Observer(self.is_sitl, self.is_airsim)
 
-        self.rate = 0.5
+        self.rate = 1.0
 
         self.pub_diag = rospy.Publisher('/system_diagnostics', Diagnostics, queue_size = 1)
 

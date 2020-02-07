@@ -46,6 +46,27 @@
   'method': 'topic'
   'topic_type': PoseStamped
   'timeout': 2.0
+
+'navigation':
+  'topic': '/MOVE/local_costmap/costmap'
+  'script': 'start_nav.sh'
+  'method': 'topic'
+  'topic_type': OccupancyGrid
+  'timeout': 5.0
+
+'map_tf':
+  'topic': '/TF_MAP'
+  'script': 'start_map_tf.sh'
+  'method': 'node'
+  'topic_type': OccupancyGrid
+  'timeout': 5.0
+
+'avoidance':
+  'topic': '/obstacles'
+  'script': 'start_avoidance.sh'
+  'method': 'node'
+  'topic_type': PointCloud2
+  'timeout': 5.0
   
 'nav_inertial':
   'topic': '/MOVE_INERTIAL/local_costmap/costmap'
@@ -129,6 +150,13 @@
   'script': 'start_nav_trans.sh'
   'method': 'topic'
   'topic_type': OccupancyGrid
+  'timeout': 5.0
+  
+'rviz':
+  'topic': ''
+  'script': 'start_rviz.sh'
+  'method': 'none'
+  'topic_type': None
   'timeout': 5.0
   
 'rviz_inertial':

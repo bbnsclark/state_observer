@@ -73,15 +73,13 @@ class Observer:
 
             print("Hardware mode")
 
-            self.common_nodes = {k:v for k,v in NODES.items() if k in ['rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf_inertial']}.values()
+            self.common_nodes = {k:v for k,v in NODES.items() if k in ['rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf_inertial', 'avoidance', 'navigation']}.values()
 
-            self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver', 'gps_conv', 'nav_sat', 'avoid_global', 'nav_global', 'control_global']}.values()
+            self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver', 'gps_conv', 'nav_sat', 'control_global']}.values()
 
-            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'avoid_inertial', 'nav_trans']}.values()
+            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp']}.values()
 
-            self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'nav_inertial', 'avoid_inertial', 'map_local']}.values()
-
-            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'nav_trans', 'avoid_inertial', 'rviz_trans']}.values()
+            self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'map_local']}.values()
 
         else:
 
@@ -117,13 +115,13 @@ class Observer:
 
                 print("Gazebo mode")
 
-                self.common_nodes = {k:v for k,v in NODES.items() if k in ['rosbridge', 'sitl', 'firmware', 'ekf_inertial']}.values()
+                self.common_nodes = {k:v for k,v in NODES.items() if k in ['rosbridge', 'sitl', 'firmware', 'ekf_inertial', 'avoidance', 'navigation', 'rviz']}.values()
 
-                self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_gazebo','gps_conv', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global', 'rviz_global']}.values()
+                self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver_gazebo','gps_conv', 'nav_sat', 'control_global']}.values()
 
-                self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'avoid_inertial',  'nav_inertial', 'map_local', 'rviz_inertial']}.values()
+                self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'map_local']}.values()
 
-                self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'nav_trans', 'avoid_inertial', 'rviz_trans']}.values()
+                self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'rviz_trans']}.values()
 
         self.system_states = ['idle', 'broadcasting', 'fault']
 

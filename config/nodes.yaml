@@ -53,6 +53,20 @@
   'method': 'topic'
   'topic_type': OccupancyGrid
   'timeout': 5.0
+
+'navigation':
+  'topic': '/MOVE/local_costmap/costmap'
+  'script': 'start_nav.sh'
+  'method': 'topic'
+  'topic_type': OccupancyGrid
+  'timeout': 5.0
+
+'map_tf':
+  'topic': '/TF_MAP'
+  'script': 'start_map_tf.sh'
+  'method': 'node'
+  'topic_type': OccupancyGrid
+  'timeout': 5.0
   
 'gps_driver_gazebo':
   'topic': '/gps_fix'
@@ -115,6 +129,13 @@
   'script': 'start_control_global.sh'
   'method': 'topic'
   'topic_type': Float64
+  'timeout': 5.0
+
+'avoidance':
+  'topic': '/obstacles'
+  'script': 'start_avoidance.sh'
+  'method': 'node'
+  'topic_type': PointCloud2
   'timeout': 5.0
   
 'avoid_inertial':
