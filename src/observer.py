@@ -47,8 +47,6 @@ class Observer:
 
         self.manager = SystemManager(is_sitl)
 
-        self.reconf_dwa = dynamic_reconfigure.client.Client('/MOVE/DWAPlannerROS')
-
         if is_sitl:
 
             nodes_filename = 'nodes_sitl.yaml'
@@ -232,6 +230,8 @@ class Observer:
 
 
     def set_system_mode(self, new_mode):
+
+        self.reconf_dwa = dynamic_reconfigure.client.Client('/MOVE/DWAPlannerROS')
 
         to_be_stopped = [x for x in self.system_modes if x != new_mode]
 
