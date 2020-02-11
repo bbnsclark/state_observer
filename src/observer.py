@@ -233,7 +233,7 @@ class Observer:
 
         self.reconf_dwa = dynamic_reconfigure.client.Client('/MOVE/DWAPlannerROS')
 
-        to_be_stopped = [x for x in self.system_nodes[self.current_system_mode] if x != self.system_nodes[new_mode]]
+        to_be_stopped = [x for x in self.system_nodes[self.current_system_mode] if x not in self.system_nodes[new_mode]]
 
         for stack in to_be_stopped:
 
