@@ -53,7 +53,7 @@ class SystemManager:
             return False 
 
 
-    def get_active_packages(self, pkg):
+    def get_active_packages(self):
 
         active_pkgs = []
 

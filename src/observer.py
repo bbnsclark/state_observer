@@ -82,7 +82,7 @@ class Observer:
 
             print("Hardware mode")
 
-            self.common_nodes = {k:v for k,v in NODES.items() if k in ['rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf_inertial', 'avoidance', 'navigation']}.values()
+            self.common_nodes = {k:v for k,v in NODES.items() if k in ['state_obs','april_tags', 'rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf_inertial', 'avoidance', 'navigation']}.values()
 
             self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver', 'gps_conv', 'nav_sat', 'control_global']}.values()
 
@@ -96,7 +96,7 @@ class Observer:
 
                 print("AirSim mode")
 
-                common_node_names = ['firmware', 'ekf_inertial']
+                common_node_names = ['state_obs', 'april_tags', 'firmware', 'ekf_inertial']
                 common_node_names = self.adjust_strings_for_platform_suffix(common_node_names)
 
                 global_node_names = ['gps_driver_airsim', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global', 'rviz_global']
@@ -124,7 +124,7 @@ class Observer:
 
                 print("Gazebo mode")
 
-                self.common_nodes = {k:v for k,v in NODES.items() if k in ['rosbridge', 'sitl', 'firmware', 'ekf_inertial', 'avoidance', 'navigation', 'rviz']}.values()
+                self.common_nodes = {k:v for k,v in NODES.items() if k in ['state_obs', 'april_tags', 'rosbridge', 'sitl', 'firmware', 'ekf_inertial', 'avoidance', 'navigation', 'rviz']}.values()
 
                 self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver_gazebo','gps_conv', 'nav_sat', 'control_global']}.values()
 
@@ -233,17 +233,25 @@ class Observer:
 
         self.reconf_dwa = dynamic_reconfigure.client.Client('/MOVE/DWAPlannerROS')
 
-        nodes  = self.common_nodes + self.system_nodes[new_mode]
+        nodes  = []
+
+        for node in (self.common_nodes + self.system_nodes[new_mode]):
+            
+            nodes.append(node['name'])
+
+        print(nodes)
 
         cur_nodes = self.manager.get_active_packages()
+
+        print(cur_nodes)
 
         to_be_stopped = [x for x in cur_nodes if x not in nodes]
 
         print(to_be_stopped)
 
-        # for stack in to_be_stopped:
+        for stack in to_be_stopped:
 
-        self.manager.stop_stack(to_be_stopped)
+            self.manager.stop_package(stack)
 
         self.current_system_mode = new_mode
 
