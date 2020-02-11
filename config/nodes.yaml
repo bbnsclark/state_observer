@@ -13,10 +13,10 @@
   'timeout': 5.0
 
 'nav_sat':
-  'topic': '/odom_gps'
+  'topic': '/gps_navsat'
   'script': 'start_nav_sat.sh'
   'method': 'topic'
-  'topic_type': Odometry
+  'topic_type': NavSatFix
   'timeout': 5.0
 
 'icp':

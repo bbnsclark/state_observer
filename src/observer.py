@@ -121,7 +121,7 @@ class Observer:
 
                 self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'map_local']}.values()
 
-                self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp', 'rviz_trans']}.values()
+                self.transition_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'icp']}.values()
 
         self.system_states = ['idle', 'broadcasting', 'fault']
 
@@ -228,7 +228,7 @@ class Observer:
 
         self.current_system_mode = new_mode
 
-        self.manager.restart_stack(self.system_nodes[new_mode])
+        self.manager.start_stack(self.system_nodes[new_mode])
 
         return 'mode set to: ' + str(self.current_system_mode)
 
