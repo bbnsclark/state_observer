@@ -22,6 +22,8 @@ from state_observer.srv import SetMode
 from state_observer.msg import Diagnostics
 from geometry_msgs.msg import Quaternion, Twist, PoseStamped
 
+import dynamic_reconfigure.client
+
 class Observer:
 
     def adjust_keys_for_platform_suffix(self, dictionary):
@@ -44,6 +46,8 @@ class Observer:
     def __init__(self, is_sitl, is_airsim):
 
         self.manager = SystemManager(is_sitl)
+
+        self.reconf_dwa = dynamic_reconfigure.client.Client('/MOVE/DWAPlannerROS')
 
         if is_sitl:
 
@@ -68,6 +72,13 @@ class Observer:
             v['name'] = k
 
             v['topic_type'] = eval(v['topic_type'])
+
+        # Setting dynamic parameters for the dwa planner
+        self.global_dwa_params = {'max_vel_x': 0.5}
+
+        self.transition_dwa_params = {'max_vel_x': 0.35}
+        
+        self.inertial_dwa_params = {'max_vel_x': 0.25}
 
         if is_sitl == False:
 
@@ -128,6 +139,8 @@ class Observer:
         self.system_modes = ['', 'inertial', 'global', 'transition']
 
         self.system_nodes = {'': [], 'inertial': self.inertial_nodes, 'global': self.global_nodes, 'transition': self.transition_nodes}
+
+        self.system_dwa_params = {'': [], 'inertial': self.inertial_dwa_params, 'global': self.global_dwa_params, 'transition': self.transition_dwa_params}
 
         self.current_system_mode = ''
 
@@ -229,6 +242,8 @@ class Observer:
         self.current_system_mode = new_mode
 
         self.manager.start_stack(self.system_nodes[new_mode])
+
+        self.reconf_dwa.update_configuration(self.system_dwa_params[new_mode])
 
         return 'mode set to: ' + str(self.current_system_mode)
 

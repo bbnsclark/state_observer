@@ -20,8 +20,6 @@ from sensor_msgs.msg import BatteryState
 from state_observer.msg import Diagnostics
 from geometry_msgs.msg import Quaternion, Twist
 
-import dynamic_reconfigure.client
-
 class Node:
 
     def __init__(self):
