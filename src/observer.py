@@ -21,6 +21,7 @@ from sensor_msgs.msg import PointCloud2
 from state_observer.srv import SetMode
 from state_observer.msg import Diagnostics
 from geometry_msgs.msg import Quaternion, Twist, PoseStamped
+from apriltag_ros.msg import AprilTagDetectionArray
 
 import dynamic_reconfigure.client
 
@@ -239,15 +240,9 @@ class Observer:
             
             nodes.append(node['name'])
 
-        print(nodes)
-
         cur_nodes = self.manager.get_active_packages()
 
-        print(cur_nodes)
-
         to_be_stopped = [x for x in cur_nodes if x not in nodes]
-
-        print(to_be_stopped)
 
         for stack in to_be_stopped:
 

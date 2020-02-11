@@ -40,6 +40,20 @@
   'topic_type': OccupancyGrid
   'timeout': 0.5
   
+'state_obs':
+  'topic': '/system_diagnostics'
+  'script': 'start_state_observer.sh'
+  'method': 'topic'
+  'topic_type': Diagnostics
+  'timeout': 2.0
+  
+'april_tags':
+  'topic': '/tag_detections'
+  'script': 'start_tag_detection.sh'
+  'method': 'node'
+  'topic_type': AprilTagDetectionArray
+  'timeout': 2.0
+  
 'map_local':
   'topic': '/map_pose'
   'script': 'start_map_localization.sh'
