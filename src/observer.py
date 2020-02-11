@@ -16,6 +16,7 @@ from gps_common.msg import GPSFix
 from nav_msgs.msg import Odometry
 from nav_msgs.msg import OccupancyGrid
 from sensor_msgs.msg import LaserScan
+from sensor_msgs.msg import Imu
 from sensor_msgs.msg import NavSatFix
 from sensor_msgs.msg import PointCloud2
 from state_observer.srv import SetMode
