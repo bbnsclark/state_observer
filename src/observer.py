@@ -235,9 +235,11 @@ class Observer:
 
         to_be_stopped = [x for x in self.system_nodes[self.current_system_mode] if x not in self.system_nodes[new_mode]]
 
-        for stack in to_be_stopped:
+        print(to_be_stopped)
 
-            self.manager.stop_stack(self.system_nodes[stack])
+        # for stack in to_be_stopped:
+
+        self.manager.stop_stack(to_be_stopped)
 
         self.current_system_mode = new_mode
 
