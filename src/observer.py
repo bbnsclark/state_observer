@@ -244,6 +244,8 @@ class Observer:
 
         to_be_stopped = [x for x in cur_nodes if x not in nodes]
 
+        print(to_be_stopped)
+
         for stack in to_be_stopped:
 
             self.manager.stop_package(stack)

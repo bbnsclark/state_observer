@@ -47,17 +47,24 @@
   'topic_type': PoseStamped
   'timeout': 2.0
   
+'roscore':
+  'topic': '/system_diagnostics'
+  'script': 'start_state_observer.sh'
+  'method': 'none'
+  'topic_type': Diagnostics
+  'timeout': 2.0
+  
 'state_obs':
   'topic': '/system_diagnostics'
   'script': 'start_state_observer.sh'
-  'method': 'topic'
+  'method': 'node'
   'topic_type': Diagnostics
   'timeout': 2.0
   
 'april_tags':
   'topic': '/tag_detections'
   'script': 'start_tag_detection.sh'
-  'method': 'node'
+  'method': 'none'
   'topic_type': AprilTagDetectionArray
   'timeout': 2.0
   
@@ -82,11 +89,11 @@
   'topic_type': OccupancyGrid
   'timeout': 5.0
   
-'gps_driver_gazebo':
-  'topic': '/gps_fix'
-  'script': 'start_gps_driver_gazebo.sh'
-  'method': 'topic'
-  'topic_type': GPSFix
+'realsense':
+  'topic': '/camera/depth/color/points'
+  'script': 'start_realsense.sh'
+  'method': 'node'
+  'topic_type': PointCloud2
   'timeout': 5.0
 
 'gps_driver':
