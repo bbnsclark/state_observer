@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import os
+import re
 import time
 import subprocess
 
@@ -50,6 +51,17 @@ class SystemManager:
         else:
 
             return False 
+
+
+    def get_active_packages(self, pkg):
+
+        active_pkgs = []
+
+        for st in re.findall(r'\d+\.\w+', subprocess.check_output('screen -ls', shell = True)):
+
+            active_pkgs.append(re.findall(r'\w+', st)[1])
+
+        return active_pkgs
 
 
     def start_stack(self, pkg_list):
