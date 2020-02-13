@@ -74,11 +74,11 @@ class Observer:
             v['topic_type'] = eval(v['topic_type'])
 
         # Setting dynamic parameters for the dwa planner
-        self.global_dwa_params = {'max_vel_x': 0.5}
+        self.global_dwa_params = {'max_vel_x': 0.5, 'acc_lim_x': 0.5}
 
-        self.transition_dwa_params = {'max_vel_x': 0.35}
+        self.transition_dwa_params = {'max_vel_x': 0.35, 'acc_lim_x': 0.35}
         
-        self.inertial_dwa_params = {'max_vel_x': 0.25}
+        self.inertial_dwa_params = {'max_vel_x': 0.25, 'acc_lim_x': 0.25}
 
         if is_sitl == False:
 
