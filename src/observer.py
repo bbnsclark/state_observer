@@ -257,7 +257,7 @@ class Observer:
 
         print(to_be_started_keys)
 
-        to_be_started = {x: all_nodes[x] for x in to_be_started_keys if x in all_nodes}
+        to_be_started = {k:v for k, v in all_nodes.iteritems() if k in to_be_started_keys}
 
         print(to_be_started)
 
