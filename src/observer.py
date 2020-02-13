@@ -86,7 +86,7 @@ class Observer:
 
             self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs','april_tags', 'rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf_inertial', 'avoidance', 'navigation']}.values()
 
-            self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver', 'nav_sat', 'gps_conv', 'control_global']}.values()
+            self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'nav_sat', 'gps_conv', 'control_global']}.values()
 
             self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp']}.values()
 
@@ -101,7 +101,7 @@ class Observer:
                 common_node_names = ['state_obs', 'april_tags', 'firmware', 'ekf_inertial']
                 common_node_names = self.adjust_strings_for_platform_suffix(common_node_names)
 
-                global_node_names = ['gps_driver_airsim', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'avoid_global', 'rviz_global']
+                global_node_names = ['map_tf', 'gps_driver_airsim', 'nav_sat', 'control_global', 'rviz_global']
                 global_node_names = self.adjust_strings_for_platform_suffix(global_node_names)
 
                 print('Common node names: ')
