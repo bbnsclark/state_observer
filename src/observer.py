@@ -237,17 +237,15 @@ class Observer:
 
         nodes  = []
 
-        for node in (self.common_nodes + self.system_nodes[new_mode]):
+        all_nodes = (self.common_nodes + self.system_nodes[new_mode])
+
+        for node in all_nodes:
             
             nodes.append(node['name'])
-
-        print(nodes)
 
         cur_nodes = self.manager.get_active_packages()
 
         to_be_stopped = [x for x in cur_nodes if x not in nodes]
-
-        print(to_be_stopped)
 
         for stack in to_be_stopped:
 
@@ -255,13 +253,15 @@ class Observer:
 
         self.current_system_mode = new_mode
 
-        to_be_started =  [x for x in nodes if x not in cur_nodes]
+        to_be_started_keys = [x for x in nodes if x not in cur_nodes]
 
-        for stack in to_be_started:
+        print(to_be_started_keys)
 
-            self.manager.start_package(stack)
+        to_be_started = {x: all_nodes[x] for x in to_be_started_keys if x in all_nodes}
 
-            time.sleep(0.5)
+        print(to_be_started)
+
+        self.manager.start_stack(to_be_started)
 
         self.reconf_dwa.update_configuration(self.system_dwa_params[new_mode])
 
