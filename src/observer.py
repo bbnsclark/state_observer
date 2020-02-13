@@ -255,7 +255,13 @@ class Observer:
 
         self.current_system_mode = new_mode
 
-        self.manager.start_stack(self.system_nodes[new_mode])
+        to_be_started =  [x for x in nodes if x not in cur_nodes]
+
+        for stack in to_be_started:
+
+            self.manager.start_package(stack)
+
+            time.sleep(0.5)
 
         self.reconf_dwa.update_configuration(self.system_dwa_params[new_mode])
 
