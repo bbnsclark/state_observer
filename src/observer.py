@@ -241,6 +241,8 @@ class Observer:
             
             nodes.append(node['name'])
 
+        print(nodes)
+
         cur_nodes = self.manager.get_active_packages()
 
         to_be_stopped = [x for x in cur_nodes if x not in nodes]

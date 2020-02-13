@@ -55,8 +55,8 @@
   'timeout': 2.0
   
 'roscore':
-  'topic': '/system_diagnostics'
-  'script': 'start_state_observer.sh'
+  'topic': '/rosout'
+  'script': 'start_roscore.sh'
   'method': 'none'
   'topic_type': Diagnostics
   'timeout': 2.0
