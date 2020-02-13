@@ -126,9 +126,9 @@ class Observer:
 
                 print("Gazebo mode")
 
-                self.common_nodes = {k:v for k,v in NODES.items() if k in ['state_obs', 'april_tags', 'rosbridge', 'sitl', 'firmware', 'ekf_inertial', 'avoidance', 'navigation', 'rviz']}.values()
+                self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs', 'april_tags', 'rosbridge', 'sitl', 'ekf_inertial', 'avoidance', 'navigation', 'rviz']}.values()
 
-                self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver_gazebo','gps_conv', 'nav_sat', 'control_global']}.values()
+                self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver_gazebo', 'gps_conv', 'nav_sat', 'control_global']}.values()
 
                 self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'map_local']}.values()
 
@@ -239,6 +239,8 @@ class Observer:
 
         all_nodes = (self.common_nodes + self.system_nodes[new_mode])
 
+        print(all_nodes)
+
         for node in all_nodes:
             
             nodes.append(node['name'])
@@ -255,11 +257,7 @@ class Observer:
 
         to_be_started_keys = [x for x in nodes if x not in cur_nodes]
 
-        print(to_be_started_keys)
-
-        to_be_started = {k:v for k, v in all_nodes.iteritems() if k in to_be_started_keys}
-
-        print(to_be_started)
+        to_be_started = [k for k in all_nodes if k['name'] in to_be_started_keys]
 
         self.manager.start_stack(to_be_started)
 

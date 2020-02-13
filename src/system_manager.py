@@ -55,6 +55,10 @@ class SystemManager:
 
     def get_active_packages(self):
 
+        cmd = 'screen -wipe'
+
+        os.system(cmd)
+
         active_pkgs = []
 
         for st in re.findall(r'\d+\.\w+', subprocess.check_output('screen -ls', shell = True)):

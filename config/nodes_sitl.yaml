@@ -43,7 +43,7 @@
 'state_obs':
   'topic': '/system_diagnostics'
   'script': 'start_state_observer.sh'
-  'method': 'topic'
+  'method': 'node'
   'topic_type': Diagnostics
   'timeout': 2.0
   
