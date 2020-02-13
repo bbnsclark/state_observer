@@ -98,7 +98,7 @@ class Observer:
 
                 print("AirSim mode")
 
-                common_node_names = ['state_obs', 'april_tags', 'firmware', 'ekf_inertial']
+                common_node_names = ['roscore', 'video', 'state_obs', 'april_tags', 'rosbridge', 'sitl', 'ekf_inertial', 'avoidance', 'navigation', 'rviz']
                 common_node_names = self.adjust_strings_for_platform_suffix(common_node_names)
 
                 global_node_names = ['map_tf', 'gps_driver_airsim', 'nav_sat', 'control_global', 'rviz_global']
@@ -110,11 +110,11 @@ class Observer:
                 self.common_nodes = {k:v for k,v in NODES.items() if k in common_node_names}.values()
                 self.global_nodes = {k:v for k,v in NODES.items() if k in global_node_names}.values()
 
-                transition_node_names = ['icp', 'nav_trans', 'avoid_inertial', 'rviz_trans']
+                transition_node_names = ['icp', 'rviz_trans']
                 transition_node_names = self.adjust_strings_for_platform_suffix(transition_node_names)
                 self.transition_nodes = {k:v for k,v in NODES.items() if k in transition_node_names}.values()
 
-                inertial_node_names = ['explore', 'icp', 'map_inertial', 'nav_inertial', 'map_local', 'avoid_inertial', 'rviz_inertial']
+                inertial_node_names = ['map_inertial', 'map_local', 'rviz_inertial']
                 inertial_node_names = self.adjust_strings_for_platform_suffix(inertial_node_names)
                 self.inertial_nodes = {k:v for k,v in NODES.items() if k in inertial_node_names}.values()
 
