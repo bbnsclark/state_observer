@@ -25,6 +25,13 @@
   'method': 'node'
   'topic_type': Odometry
   'timeout': 0.5
+
+'pc_conv':
+  'topic': '/scan_cloud'
+  'script': 'start_pc_converter.sh'
+  'method': 'topic'
+  'topic_type': LaserScan
+  'timeout': 5.0
   
 'ekf_inertial': 
   'topic': '/odom_inertial'

@@ -19,6 +19,13 @@
   'topic_type': LaserScan
   'timeout': 5.0
 
+'pc_conv':
+  'topic': '/scan_cloud'
+  'script': 'start_pc_converter.sh'
+  'method': 'topic'
+  'topic_type': LaserScan
+  'timeout': 5.0
+
 'imu':
   'topic': '/imu'
   'script': 'start_imu.sh'
