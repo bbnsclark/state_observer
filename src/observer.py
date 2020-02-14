@@ -75,12 +75,12 @@ class Observer:
 
         # Setting dynamic parameters for the dwa planner
         self.global_dwa_params = {
-            'acc_lim_x': 0.4,
+            'acc_lim_x': 0.75,
             'max_vel_x': 0.5, 
             'max_vel_trans': 0.5,  
             'max_vel_theta': 0.5, 
             'min_vel_theta': -0.5,
-            'acc_lim_theta': 1.0,
+            'acc_lim_theta': 1.5,
 
             'sim_time': 1.75,
             'vx_samples': 10,
