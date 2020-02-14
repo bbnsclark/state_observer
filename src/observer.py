@@ -86,9 +86,9 @@ class Observer:
             }
 
         self.transition_dwa_params = {
-            'max_vel_x': 0.35, 
-            'max_vel_trans': 0.35, 
-            'acc_lim_x': 0.65, 
+            'max_vel_x': 0.4, 
+            'max_vel_trans': 0.4, 
+            'acc_lim_x': 0.35, 
             'xy_goal_tolerance': 0.5, 
             'yaw_goal_tolerance': 0.1, 
             'max_vel_theta': 0.35, 
@@ -97,9 +97,9 @@ class Observer:
             }
         
         self.inertial_dwa_params = {
-            'max_vel_x': 0.35, 
-            'max_vel_trans': 0.35, 
-            'acc_lim_x': 0.5, 
+            'max_vel_x': 0.3, 
+            'max_vel_trans': 0.3, 
+            'acc_lim_x': 0.25, 
             'xy_goal_tolerance': 0.25, 
             'yaw_goal_tolerance': 0.1, 
             'max_vel_theta': 0.5, 
