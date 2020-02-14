@@ -119,7 +119,7 @@ class Observer:
 
             self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp']}.values()
 
-            self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'map_local']}.values()
+            self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial']}.values()
 
         else:
 
