@@ -111,7 +111,7 @@ class Observer:
 
             print("Hardware mode")
 
-            self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs','april_tags', 'rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf_inertial', 'pc_conv', 'avoidance', 'navigation']}.values()
+            self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs','april_tags', 'rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf_inertial', 'avoidance', 'navigation']}.values()
 
             self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'nav_sat', 'gps_conv', 'control_global']}.values()
 
