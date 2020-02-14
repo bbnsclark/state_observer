@@ -81,7 +81,8 @@ class Observer:
             'xy_goal_tolerance': 1.0, 
             'yaw_goal_tolerance': 0.2, 
             'max_vel_theta': 0.75, 
-            'min_vel_theta': -0.75
+            'min_vel_theta': -0.75, 
+            'acc_lim_x_theta': 1.5
             }
 
         self.transition_dwa_params = {
@@ -91,7 +92,8 @@ class Observer:
             'xy_goal_tolerance': 0.5, 
             'yaw_goal_tolerance': 0.1, 
             'max_vel_theta': 0.5, 
-            'min_vel_theta': -0.5
+            'min_vel_theta': -0.5, 
+            'acc_lim_x_theta': 1.0
             }
         
         self.inertial_dwa_params = {
@@ -101,7 +103,8 @@ class Observer:
             'xy_goal_tolerance': 0.5, 
             'yaw_goal_tolerance': 0.1, 
             'max_vel_theta': 0.5, 
-            'min_vel_theta': -0.5
+            'min_vel_theta': -0.5, 
+            'acc_lim_x_theta': 1.0
             }
 
         if is_sitl == False:
