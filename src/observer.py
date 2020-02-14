@@ -75,36 +75,54 @@ class Observer:
 
         # Setting dynamic parameters for the dwa planner
         self.global_dwa_params = {
-            'max_vel_x': 0.5, 
-            'max_vel_trans': 0.5,
             'acc_lim_x': 0.5, 
-            'xy_goal_tolerance': 1.0, 
-            'yaw_goal_tolerance': 0.2, 
+            'max_vel_x': 0.5, 
+            'max_vel_trans': 0.5,  
             'max_vel_theta': 0.75, 
-            'min_vel_theta': -0.75, 
-            'acc_lim_theta': 1.25
+            'min_vel_theta': -0.75,
+            'acc_lim_theta': 1.25,
+
+            'sim_time': 2.5,
+            'vx_samples': 10,
+            'vth_samples': 20,
+
+            'xy_goal_tolerance': 1.0, 
+            'yaw_goal_tolerance': 0.0
+            
             }
 
         self.transition_dwa_params = {
+            'acc_lim_x': 0.4, 
             'max_vel_x': 0.4, 
-            'max_vel_trans': 0.4, 
-            'acc_lim_x': 0.35, 
+            'max_vel_trans': 0.4,  
+            'max_vel_theta': 0.75, 
+            'min_vel_theta': -0.75,
+            'acc_lim_theta': 1.25,
+
+            'sim_time': 2.5,
+            'vx_samples': 10,
+            'vth_samples': 20,
+
             'xy_goal_tolerance': 0.5, 
-            'yaw_goal_tolerance': 0.1, 
-            'max_vel_theta': 0.35, 
-            'min_vel_theta': -0.35, 
-            'acc_lim_theta': 0.75
+            'yaw_goal_tolerance': 0.15
+            
             }
         
         self.inertial_dwa_params = {
+            'acc_lim_x': 0.3, 
             'max_vel_x': 0.3, 
-            'max_vel_trans': 0.3, 
-            'acc_lim_x': 0.25, 
-            'xy_goal_tolerance': 0.25, 
-            'yaw_goal_tolerance': 0.1, 
+            'max_vel_trans': 0.3,  
             'max_vel_theta': 0.5, 
-            'min_vel_theta': -0.5, 
-            'acc_lim_theta': 0.75
+            'min_vel_theta': -0.5,
+            'acc_lim_theta': 0.75,
+
+            'sim_time': 1.75,
+            'vx_samples': 10,
+            'vth_samples': 20,
+
+            'xy_goal_tolerance': 0.25, 
+            'yaw_goal_tolerance': 0.1
+            
             }
 
         if is_sitl == False:
