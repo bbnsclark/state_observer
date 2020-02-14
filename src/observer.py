@@ -87,7 +87,10 @@ class Observer:
             'vth_samples': 10,
 
             'xy_goal_tolerance': 1.0, 
-            'yaw_goal_tolerance': 0.0
+            'yaw_goal_tolerance': 0.0,
+
+            'path_distance_bias': 32.0,
+            'goal_distance_bias': 20.0,
             
             }
 
