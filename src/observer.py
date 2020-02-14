@@ -76,7 +76,8 @@ class Observer:
         # Setting dynamic parameters for the dwa planner
         self.global_dwa_params = {
             'max_vel_x': 0.5, 
-            'max_vel_trans': 0.5, 
+            'max_vel_trans': 0.5,
+            'sim_time': 2.5, 
             'acc_lim_x': 0.5, 
             'xy_goal_tolerance': 1.0, 
             'yaw_goal_tolerance': 0.2, 
@@ -99,6 +100,7 @@ class Observer:
         self.inertial_dwa_params = {
             'max_vel_x': 0.25, 
             'max_vel_trans': 0.25, 
+            'sim_time': 1.5, 
             'acc_lim_x': 0.25, 
             'xy_goal_tolerance': 0.5, 
             'yaw_goal_tolerance': 0.1, 
