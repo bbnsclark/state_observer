@@ -28,7 +28,7 @@
 
 'pc_conv':
   'topic': '/scan_cloud'
-  'script': 'start_pc_converter.sh'
+  'script': 'start_pc_convert.sh'
   'method': 'topic'
   'topic_type': LaserScan
   'timeout': 5.0
