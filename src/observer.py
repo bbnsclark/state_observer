@@ -132,7 +132,7 @@ class Observer:
 
             print("Hardware mode")
 
-            self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs','april_tags', 'rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf_inertial', 'avoidance', 'navigation']}.values()
+            self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs','april_tags', 'rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf_inertial', 'navigation']}.values()
 
             self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'nav_sat', 'gps_conv', 'control_global']}.values()
 
@@ -146,7 +146,7 @@ class Observer:
 
                 print("AirSim mode")
 
-                common_node_names = ['roscore', 'video', 'state_obs', 'april_tags', 'rosbridge', 'sitl', 'ekf_inertial', 'avoidance', 'navigation', 'rviz']
+                common_node_names = ['roscore', 'video', 'state_obs', 'april_tags', 'rosbridge', 'sitl', 'ekf_inertial', 'navigation', 'rviz']
                 common_node_names = self.adjust_strings_for_platform_suffix(common_node_names)
 
                 global_node_names = ['map_tf', 'gps_driver_airsim', 'nav_sat', 'control_global', 'rviz_global']
@@ -174,7 +174,7 @@ class Observer:
 
                 print("Gazebo mode")
 
-                self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs', 'april_tags', 'rosbridge', 'sitl', 'ekf_inertial', 'avoidance', 'navigation', 'rviz']}.values()
+                self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs', 'april_tags', 'rosbridge', 'sitl', 'ekf_inertial', 'navigation', 'rviz']}.values()
 
                 self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver_gazebo', 'gps_conv', 'nav_sat', 'control_global']}.values()
 
