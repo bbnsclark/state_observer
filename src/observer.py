@@ -107,7 +107,7 @@ class Observer:
             'vth_samples': 10,
 
             'xy_goal_tolerance': 0.5, 
-            'yaw_goal_tolerance': 0.2
+            'yaw_goal_tolerance': 0.15
             
             }
         
@@ -123,8 +123,8 @@ class Observer:
             'vx_samples': 10,
             'vth_samples': 10,
 
-            'xy_goal_tolerance': 0.25, 
-            'yaw_goal_tolerance': 0.2
+            'xy_goal_tolerance': 0.35, 
+            'yaw_goal_tolerance': 0.15
             
             }
 
