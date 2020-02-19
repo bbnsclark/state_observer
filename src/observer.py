@@ -136,9 +136,9 @@ class Observer:
 
             self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'nav_sat', 'gps_conv', 'control_global']}.values()
 
-            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['icp']}.values()
+            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'icp']}.values()
 
-            self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial']}.values()
+            self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'icp']}.values()
 
         else:
 
