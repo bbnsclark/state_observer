@@ -120,9 +120,9 @@ class Observer:
         self.inertial_dwa_params = {
             'acc_lim_x': 0.25, 
             'max_vel_x': 0.3,
-            'min_vel_x': -0.15, 
+            'min_vel_x': -0.05, 
             'max_vel_trans': 0.3,
-            'min_vel_trans': -0.15,  
+            'min_vel_trans': -0.05,  
 
             'max_vel_theta': 0.35, 
             'min_vel_theta': -0.35,
