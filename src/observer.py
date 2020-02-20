@@ -118,8 +118,8 @@ class Observer:
             'max_vel_x': 0.3, 
             'max_vel_trans': 0.3,
 
-            'max_vel_theta': 0.5, 
-            'min_vel_theta': -0.5,
+            'max_vel_theta': 0.35, 
+            'min_vel_theta': -0.35,
             'acc_lim_theta': 0.75,
 
             'sim_time': 2.5,
