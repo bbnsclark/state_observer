@@ -108,7 +108,7 @@ class Observer:
             'min_vel_theta': -0.5,
             'acc_lim_theta': 1.0,
 
-            'sim_time': 2.5,
+            'sim_time': 3.5,
             'vx_samples': 10,
             'vth_samples': 10,
 
