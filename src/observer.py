@@ -152,7 +152,7 @@ class Observer:
                 common_node_names = ['roscore', 'video', 'state_obs', 'april_tags', 'rosbridge', 'sitl', 'ekf_inertial', 'navigation', 'rviz']
                 common_node_names = self.adjust_strings_for_platform_suffix(common_node_names)
 
-                global_node_names = ['map_tf', 'gps_driver_airsim', 'nav_sat', 'control_global', 'rviz_global']
+                global_node_names = ['map_tf', 'gps_driver_airsim', 'nav_sat', 'control_global']
                 global_node_names = self.adjust_strings_for_platform_suffix(global_node_names)
 
                 print('Common node names: ')
@@ -161,7 +161,7 @@ class Observer:
                 self.common_nodes = {k:v for k,v in NODES.items() if k in common_node_names}.values()
                 self.global_nodes = {k:v for k,v in NODES.items() if k in global_node_names}.values()
 
-                transition_node_names = ['icp', 'rviz_trans']
+                transition_node_names = ['map_tf']
                 transition_node_names = self.adjust_strings_for_platform_suffix(transition_node_names)
                 self.transition_nodes = {k:v for k,v in NODES.items() if k in transition_node_names}.values()
 
@@ -169,9 +169,9 @@ class Observer:
                 inertial_node_names = self.adjust_strings_for_platform_suffix(inertial_node_names)
                 self.inertial_nodes = {k:v for k,v in NODES.items() if k in inertial_node_names}.values()
 
-                self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_airsim', 'nav_sat', 'ekf_global', 'nav_global', 'control_global', 'rviz_global']}.values()
+                self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_airsim', 'nav_sat', 'control_global']}.values()
 
-                self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'avoid_inertial',  'nav_inertial', 'map_local', 'rviz_inertial']}.values()
+                self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'map_local']}.values()
             
             else:
 
