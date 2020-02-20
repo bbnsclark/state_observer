@@ -78,6 +78,7 @@ class Observer:
             'acc_lim_x': 0.75,
             'max_vel_x': 0.5, 
             'max_vel_trans': 0.5,  
+
             'max_vel_theta': 0.5, 
             'min_vel_theta': -0.5,
             'acc_lim_theta': 1.5,
@@ -98,8 +99,9 @@ class Observer:
             'acc_lim_x': 0.25, 
             'max_vel_x': 0.35, 
             'max_vel_trans': 0.35,  
-            'max_vel_theta': 0.5, 
-            'min_vel_theta': -0.5,
+
+            'max_vel_theta': 0.35, 
+            'min_vel_theta': -0.35,
             'acc_lim_theta': 1.0,
 
             'sim_time': 2.5,
@@ -114,7 +116,8 @@ class Observer:
         self.inertial_dwa_params = {
             'acc_lim_x': 0.25, 
             'max_vel_x': 0.3, 
-            'max_vel_trans': 0.3,  
+            'max_vel_trans': 0.3,
+
             'max_vel_theta': 0.5, 
             'min_vel_theta': -0.5,
             'acc_lim_theta': 0.75,
