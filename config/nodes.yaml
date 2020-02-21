@@ -65,7 +65,7 @@
   'topic': '/rosout'
   'script': 'start_roscore.sh'
   'method': 'node'
-  'topic_type': Diagnostics
+  'topic_type': None
   'timeout': 2.0
   
 'state_obs':

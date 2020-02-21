@@ -207,6 +207,13 @@
   'method': 'node'
   'topic_type': None
   'timeout' : 5.0
+
+'roscore':
+  'topic': '/rosout'
+  'script': 'start_roscore.sh'
+  'method': 'node'
+  'topic_type': None
+  'timeout': 2.0
   
 'rosbridge':
   'name': 'rosbridge'
