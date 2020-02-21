@@ -96,7 +96,7 @@
   'topic_type': OccupancyGrid
   'timeout': 0.5
   
-'gps_driver_gazebo':
+'gps_driver':
   'topic': '/gps_fix'
   'script': 'start_gps_driver_gazebo.sh'
   'method': 'node'

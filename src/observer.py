@@ -185,7 +185,7 @@ class Observer:
 
                 self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs', 'april_tags', 'rosbridge', 'sitl', 'ekf_inertial', 'navigation', 'rviz']}.values()
 
-                self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver_gazebo', 'gps_conv', 'nav_sat', 'control_global']}.values()
+                self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'gps_conv', 'nav_sat', 'control_global']}.values()
 
                 self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'map_local']}.values()
 
