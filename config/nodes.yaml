@@ -111,7 +111,7 @@
   'timeout': 5.0
 
 'gps_driver':
-  'topic': '/gps_navsat_raw'
+  'topic': '/gps_navsat'
   'script': 'start_gps_driver.sh'
   'method': 'topic'
   'topic_type': NavSatFix
