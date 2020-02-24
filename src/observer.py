@@ -77,9 +77,9 @@ class Observer:
         self.global_dwa_params = {
             'acc_lim_x': 0.5,
             'max_vel_x': 0.5, 
-            'min_vel_x': -0.15, 
+            'min_vel_x': -0.1, 
             'max_vel_trans': 0.5, 
-            'min_vel_trans': -0.15,  
+            'min_vel_trans': -0.1,  
 
             'max_vel_theta': 0.5, 
             'min_vel_theta': -0.5,
