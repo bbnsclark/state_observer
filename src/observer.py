@@ -143,7 +143,7 @@ class Observer:
 
             self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs','april_tags', 'rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf_inertial', 'navigation']}.values()
 
-            self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'gps_conv', 'control_global']}.values()
+            self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'nav_sat', 'gps_conv', 'control_global']}.values()
 
             self.transition_nodes = {k:v for k,v in NODES.items() if k in ['map_tf']}.values()
 
@@ -175,7 +175,7 @@ class Observer:
                 inertial_node_names = self.adjust_strings_for_platform_suffix(inertial_node_names)
                 self.inertial_nodes = {k:v for k,v in NODES.items() if k in inertial_node_names}.values()
 
-                self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_airsim', 'control_global']}.values()
+                self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_airsim', 'gps_conv', 'nav_sat', 'control_global']}.values()
 
                 self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'map_local']}.values()
             
@@ -185,7 +185,7 @@ class Observer:
 
                 self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs', 'april_tags', 'rosbridge', 'sitl', 'ekf_inertial', 'navigation', 'rviz']}.values()
 
-                self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'gps_conv', 'control_global']}.values()
+                self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver','gps_conv', 'nav_sat', 'control_global']}.values()
 
                 self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'map_local']}.values()
 
