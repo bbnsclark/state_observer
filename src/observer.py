@@ -113,7 +113,10 @@ class Observer:
             'vth_samples': 10,
 
             'xy_goal_tolerance': 0.5, 
-            'yaw_goal_tolerance': 0.15
+            'yaw_goal_tolerance': 0.15,
+
+            'path_distance_bias': 32.0,
+            'goal_distance_bias': 20.0,
             
             }
         
@@ -133,7 +136,10 @@ class Observer:
             'vth_samples': 10,
 
             'xy_goal_tolerance': 0.35, 
-            'yaw_goal_tolerance': 0.15
+            'yaw_goal_tolerance': 0.15,
+
+            'path_distance_bias': 32.0,
+            'goal_distance_bias': 20.0,
             
             }
 
