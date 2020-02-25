@@ -120,7 +120,30 @@ class Observer:
             
             }
         
-        self.inertial_dwa_params = {
+        self.slam_dwa_params = {
+            'acc_lim_x': 0.25, 
+            'max_vel_x': 0.3,
+            'min_vel_x': -0.05, 
+            'max_vel_trans': 0.3,
+            'min_vel_trans': -0.05,  
+
+            'max_vel_theta': 0.35, 
+            'min_vel_theta': -0.35,
+            'acc_lim_theta': 0.75,
+
+            'sim_time': 3.5,
+            'vx_samples': 10,
+            'vth_samples': 10,
+
+            'xy_goal_tolerance': 0.35, 
+            'yaw_goal_tolerance': 0.15,
+
+            'path_distance_bias': 32.0,
+            'goal_distance_bias': 20.0,
+            
+            }
+        
+        self.amcl_dwa_params = {
             'acc_lim_x': 0.25, 
             'max_vel_x': 0.3,
             'min_vel_x': -0.05, 
@@ -147,13 +170,15 @@ class Observer:
 
             print("Hardware mode")
 
-            self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs','april_tags', 'rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf_inertial', 'navigation']}.values()
+            self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs','april_tags', 'rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf', 'navigation']}.values()
 
             self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'gps_conv', 'control_global']}.values()
 
             self.transition_nodes = {k:v for k,v in NODES.items() if k in ['map_tf']}.values()
 
-            self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'map_local']}.values()
+            self.slam_nodes = {k:v for k,v in NODES.items() if k in ['map', 'map_local', 'explore']}.values()
+
+            self.amcl_nodes = {k:v for k,v in NODES.items() if k in ['amcl', 'map_local']}.values()
 
         else:
 
@@ -161,7 +186,7 @@ class Observer:
 
                 print("AirSim mode")
 
-                common_node_names = ['roscore', 'video', 'state_obs', 'april_tags', 'rosbridge', 'sitl', 'ekf_inertial', 'navigation', 'rviz']
+                common_node_names = ['roscore', 'video', 'state_obs', 'april_tags', 'rosbridge', 'sitl', 'ekf', 'navigation', 'rviz']
                 common_node_names = self.adjust_strings_for_platform_suffix(common_node_names)
 
                 global_node_names = ['map_tf', 'gps_driver_airsim', 'nav_sat', 'control_global']
@@ -177,33 +202,35 @@ class Observer:
                 transition_node_names = self.adjust_strings_for_platform_suffix(transition_node_names)
                 self.transition_nodes = {k:v for k,v in NODES.items() if k in transition_node_names}.values()
 
-                inertial_node_names = ['map_inertial', 'map_local', 'rviz_inertial']
-                inertial_node_names = self.adjust_strings_for_platform_suffix(inertial_node_names)
-                self.inertial_nodes = {k:v for k,v in NODES.items() if k in inertial_node_names}.values()
+                slam_node_names = ['map', 'map_local']
+                slam_node_names = self.adjust_strings_for_platform_suffix(slam_node_names)
+                self.slam_nodes = {k:v for k,v in NODES.items() if k in slam_node_names}.values()
 
                 self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_airsim', 'gps_conv', 'control_global']}.values()
 
-                self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'map_local']}.values()
+                self.slam_nodes = {k:v for k,v in NODES.items() if k in ['map', 'map_local']}.values()
             
             else:
 
                 print("Gazebo mode")
 
-                self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs', 'april_tags', 'rosbridge', 'sitl', 'ekf_inertial', 'navigation', 'rviz']}.values()
+                self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs', 'april_tags', 'rosbridge', 'sitl', 'ekf', 'navigation', 'rviz']}.values()
 
                 self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'gps_conv', 'control_global']}.values()
 
-                self.inertial_nodes = {k:v for k,v in NODES.items() if k in ['map_inertial', 'map_local']}.values()
+                self.slam_nodes = {k:v for k,v in NODES.items() if k in ['map', 'map_local']}.values()
+
+                self.amcl_nodes = {k:v for k,v in NODES.items() if k in ['amcl', 'map_local']}.values()
 
                 self.transition_nodes = {k:v for k,v in NODES.items() if k in ['map_tf']}.values()
 
         self.system_states = ['idle', 'broadcasting', 'fault']
 
-        self.system_modes = ['', 'inertial', 'global', 'transition']
+        self.system_modes = ['', 'slam', 'amcl','global', 'transition']
 
-        self.system_nodes = {'': [], 'inertial': self.inertial_nodes, 'global': self.global_nodes, 'transition': self.transition_nodes}
+        self.system_nodes = {'': [], 'slam': self.slam_nodes, 'amcl': self.amcl_nodes, 'global': self.global_nodes, 'transition': self.transition_nodes}
 
-        self.system_dwa_params = {'': [], 'inertial': self.inertial_dwa_params, 'global': self.global_dwa_params, 'transition': self.transition_dwa_params}
+        self.system_dwa_params = {'': [], 'slam': self.slam_dwa_params, 'amcl': self.amcl_dwa_params, 'global': self.global_dwa_params, 'transition': self.transition_dwa_params}
 
         self.current_system_mode = ''
 

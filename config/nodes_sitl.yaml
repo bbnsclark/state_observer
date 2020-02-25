@@ -33,19 +33,26 @@
   'topic_type': LaserScan
   'timeout': 5.0
   
-'ekf_inertial': 
-  'topic': '/odom_inertial'
-  'script': 'start_ekf_inertial.sh'
+'ekf': 
+  'topic': '/odom'
+  'script': 'start_ekf.sh'
   'method': 'node'
   'topic_type': Odometry
   'timeout': 0.5
   
-'map_inertial':
+'map':
   'topic': '/map'
-  'script': 'start_map_inertial.sh'
+  'script': 'start_map.sh'
   'method': 'node'
   'topic_type': OccupancyGrid
   'timeout': 0.5
+  
+'amcl':
+  'topic': '/map'
+  'script': 'start_amcl.sh'
+  'method': 'node'
+  'topic_type': OccupancyGrid
+  'timeout': 2.0
   
 'state_obs':
   'topic': '/system_diagnostics'

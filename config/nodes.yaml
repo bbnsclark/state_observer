@@ -40,17 +40,24 @@
   'topic_type': Odometry
   'timeout': 5.0
   
-'ekf_inertial': 
-  'topic': '/odom_inertial'
-  'script': 'start_ekf_inertial.sh'
+'ekf': 
+  'topic': '/odom'
+  'script': 'start_ekf.sh'
   'method': 'topic'
   'topic_type': Odometry
   'timeout': 5.0
   
-'map_inertial':
+'map':
   'topic': '/map'
-  'script': 'start_map_inertial.sh'
+  'script': 'start_map.sh'
   'method': 'topic'
+  'topic_type': OccupancyGrid
+  'timeout': 2.0
+  
+'amcl':
+  'topic': '/map'
+  'script': 'start_amcl.sh'
+  'method': 'node'
   'topic_type': OccupancyGrid
   'timeout': 2.0
   
