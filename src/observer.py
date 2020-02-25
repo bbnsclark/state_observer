@@ -135,7 +135,7 @@ class Observer:
             'vx_samples': 10,
             'vth_samples': 10,
 
-            'xy_goal_tolerance': 1.0, 
+            'xy_goal_tolerance': 0.35, 
             'yaw_goal_tolerance': 0.15,
 
             'path_distance_bias': 32.0,
