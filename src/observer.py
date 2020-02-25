@@ -139,7 +139,7 @@ class Observer:
             'yaw_goal_tolerance': 0.15,
 
             'path_distance_bias': 32.0,
-            'goal_distance_bias': 5.0,
+            'goal_distance_bias': 24.0,
             
             }
         
