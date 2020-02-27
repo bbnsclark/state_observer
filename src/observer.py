@@ -218,7 +218,7 @@ class Observer:
 
             self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'gps_conv', 'control_global']}.values()
 
-            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['map_tf']}.values()
+            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver','gps_conv']}.values()
 
             self.slam_nodes = {k:v for k,v in NODES.items() if k in ['map', 'map_local', 'explore']}.values()
 
@@ -242,7 +242,7 @@ class Observer:
                 self.common_nodes = {k:v for k,v in NODES.items() if k in common_node_names}.values()
                 self.global_nodes = {k:v for k,v in NODES.items() if k in global_node_names}.values()
 
-                transition_node_names = ['map_tf']
+                transition_node_names = ['map_tf', 'gps_driver','gps_conv']
                 transition_node_names = self.adjust_strings_for_platform_suffix(transition_node_names)
                 self.transition_nodes = {k:v for k,v in NODES.items() if k in transition_node_names}.values()
 
@@ -266,7 +266,7 @@ class Observer:
 
                 self.amcl_nodes = {k:v for k,v in NODES.items() if k in ['amcl', 'map_local']}.values()
 
-                self.transition_nodes = {k:v for k,v in NODES.items() if k in ['map_tf']}.values()
+                self.transition_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'gps_conv']}.values()
 
         self.system_states = ['idle', 'broadcasting', 'fault']
 
