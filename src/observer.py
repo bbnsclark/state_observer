@@ -97,6 +97,16 @@ class Observer:
             
             }
 
+        self.global_locost_params = {
+            'width': 8.0,
+            'height': 8.0
+        }
+
+        self.global_glocost_params = {
+            'width': 15.0,
+            'height': 15.0
+        }
+
         self.transition_dwa_params = {
             'acc_lim_x': 0.25, 
             'max_vel_x': 0.35, 
@@ -119,6 +129,16 @@ class Observer:
             'goal_distance_bias': 20.0,
             
             }
+
+        self.transition_locost_params = {
+            'width': 2.5,
+            'height': 2.5
+        }
+
+        self.transition_glocost_params = {
+            'width': 15.0,
+            'height': 15.0
+        }
         
         self.slam_dwa_params = {
             'acc_lim_x': 0.25, 
@@ -142,6 +162,16 @@ class Observer:
             'goal_distance_bias': 24.0,
             
             }
+
+        self.slam_locost_params = {
+            'width': 8.0,
+            'height': 8.0
+        }
+
+        self.slam_glocost_params = {
+            'width': 15.0,
+            'height': 15.0
+        }
         
         self.amcl_dwa_params = {
             'acc_lim_x': 0.25, 
@@ -165,6 +195,16 @@ class Observer:
             'goal_distance_bias': 20.0,
             
             }
+
+        self.amcl_locost_params = {
+            'width': 8.0,
+            'height': 8.0
+        }
+
+        self.amcl_glocost_params = {
+            'width': 15.0,
+            'height': 15.0
+        }
 
         if is_sitl == False:
 
@@ -231,6 +271,11 @@ class Observer:
         self.system_nodes = {'': [], 'slam': self.slam_nodes, 'amcl': self.amcl_nodes, 'global': self.global_nodes, 'transition': self.transition_nodes}
 
         self.system_dwa_params = {'': [], 'slam': self.slam_dwa_params, 'amcl': self.amcl_dwa_params, 'global': self.global_dwa_params, 'transition': self.transition_dwa_params}
+
+        self.system_locost_params = {'': [], 'slam': self.slam_locost_params, 'amcl': self.amcl_locost_params, 'global': self.global_locost_params, 'transition': self.transition_locost_params}
+
+        self.system_glocost_params = {'': [], 'slam': self.slam_glocost_params, 'amcl': self.amcl_glocost_params, 'global': self.global_glocost_params, 'transition': self.transition_glocost_params}
+
 
         self.current_system_mode = ''
 
@@ -325,6 +370,10 @@ class Observer:
 
         self.reconf_dwa = dynamic_reconfigure.client.Client('/MOVE/DWAPlannerROS')
 
+        self.reconf_locost = dynamic_reconfigure.client.Client('/MOVE/local_costmap')
+
+        self.reconf_glocost = dynamic_reconfigure.client.Client('/MOVE/global_costmap')
+
         nodes  = []
 
         all_nodes = (self.common_nodes + self.system_nodes[new_mode])
@@ -352,6 +401,10 @@ class Observer:
         self.manager.start_stack(to_be_started)
 
         self.reconf_dwa.update_configuration(self.system_dwa_params[new_mode])
+
+        self.reconf_locost.update_configuration(self.system_locost_params[new_mode])
+
+        self.reconf_glocost.update_configuration(self.system_glocost_params[new_mode])
 
         return 'mode set to: ' + str(self.current_system_mode)
 
