@@ -92,8 +92,9 @@ class Observer:
             'xy_goal_tolerance': 1.0, 
             'yaw_goal_tolerance': 0.2,
 
-            'path_distance_bias': 32.0,
+            'path_distance_bias': 50.0,
             'goal_distance_bias': 20.0,
+            'occdist_scale' : 0.03
             
             }
 
@@ -127,6 +128,7 @@ class Observer:
 
             'path_distance_bias': 32.0,
             'goal_distance_bias': 20.0,
+            'occdist_scale' : 0.03
             
             }
 
@@ -160,6 +162,7 @@ class Observer:
 
             'path_distance_bias': 32.0,
             'goal_distance_bias': 24.0,
+            'occdist_scale' : 0.03
             
             }
 
@@ -193,6 +196,7 @@ class Observer:
 
             'path_distance_bias': 32.0,
             'goal_distance_bias': 20.0,
+            'occdist_scale' : 0.03
             
             }
 
