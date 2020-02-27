@@ -92,9 +92,9 @@ class Observer:
             'xy_goal_tolerance': 1.0, 
             'yaw_goal_tolerance': 0.2,
 
-            'path_distance_bias': 50.0,
+            'path_distance_bias': 10.0,
             'goal_distance_bias': 20.0,
-            'occdist_scale' : 0.03
+            'occdist_scale' : 0.05
             
             }
 
@@ -104,8 +104,8 @@ class Observer:
         }
 
         self.global_glocost_params = {
-            'width': 15.0,
-            'height': 15.0
+            'width': 25.0,
+            'height': 25.0
         }
 
         self.transition_dwa_params = {
@@ -138,8 +138,8 @@ class Observer:
         }
 
         self.transition_glocost_params = {
-            'width': 15.0,
-            'height': 15.0
+            'width': 20.0,
+            'height': 20.0
         }
         
         self.slam_dwa_params = {
