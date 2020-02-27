@@ -18,6 +18,7 @@ from sensor_msgs.msg import NavSatFix
 from state_observer.srv import SetMode
 from sensor_msgs.msg import BatteryState
 from state_observer.msg import Diagnostics
+from std_srvs.srv import Empty, EmptyRequest
 from geometry_msgs.msg import Quaternion, Twist
 
 class Node:
@@ -37,6 +38,10 @@ class Node:
         self.pub_diag = rospy.Publisher('/system_diagnostics', Diagnostics, queue_size = 1)
 
         self.srv_cmd_state = rospy.Service('set_mode', SetMode, self.set_mode_callback)
+
+        rospy.wait_for_service('/MOVE/clear_costmaps')
+        
+        self.clear_costmaps_srv = rospy.ServiceProxy('/MOVE/clear_costmaps', Empty)
 
         rospy.loginfo('Starting state observer...')
 
@@ -69,6 +74,8 @@ class Node:
         if msg.cmd == 'set':
 
             reply = self.observer.set_system_mode(msg.target_mode)
+
+            self.clear_costmaps_srv(EmptyRequest())
 
         elif msg.cmd == 'reset':
 

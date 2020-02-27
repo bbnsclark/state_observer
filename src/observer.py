@@ -77,9 +77,9 @@ class Observer:
         self.global_dwa_params = {
             'acc_lim_x': 0.5,
             'max_vel_x': 0.5, 
-            'min_vel_x': -0.1, 
+            'min_vel_x': -0.15, 
             'max_vel_trans': 0.5, 
-            'min_vel_trans': -0.1,  
+            'min_vel_trans': -0.15,  
 
             'max_vel_theta': 0.5, 
             'min_vel_theta': -0.5,
@@ -123,9 +123,9 @@ class Observer:
         self.slam_dwa_params = {
             'acc_lim_x': 0.25, 
             'max_vel_x': 0.3,
-            'min_vel_x': -0.05, 
+            'min_vel_x': -0.1, 
             'max_vel_trans': 0.3,
-            'min_vel_trans': -0.05,  
+            'min_vel_trans': -0.1,  
 
             'max_vel_theta': 0.35, 
             'min_vel_theta': -0.35,
@@ -146,9 +146,9 @@ class Observer:
         self.amcl_dwa_params = {
             'acc_lim_x': 0.25, 
             'max_vel_x': 0.3,
-            'min_vel_x': -0.05, 
+            'min_vel_x': -0.1, 
             'max_vel_trans': 0.3,
-            'min_vel_trans': -0.05,  
+            'min_vel_trans': -0.1,  
 
             'max_vel_theta': 0.35, 
             'min_vel_theta': -0.35,
@@ -208,7 +208,7 @@ class Observer:
 
                 self.global_nodes = {k:v for k,v in NODES.items() if k in ['gps_driver_airsim', 'gps_conv', 'control_global']}.values()
 
-                self.slam_nodes = {k:v for k,v in NODES.items() if k in ['map', 'map_local']}.values()
+                self.slam_nodes = {k:v for k,v in NODES.items() if k in ['map', 'map_local', 'explore']}.values()
             
             else:
 
@@ -218,7 +218,7 @@ class Observer:
 
                 self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'gps_conv', 'control_global']}.values()
 
-                self.slam_nodes = {k:v for k,v in NODES.items() if k in ['map', 'map_local']}.values()
+                self.slam_nodes = {k:v for k,v in NODES.items() if k in ['map', 'map_local', 'explore']}.values()
 
                 self.amcl_nodes = {k:v for k,v in NODES.items() if k in ['amcl', 'map_local']}.values()
 
