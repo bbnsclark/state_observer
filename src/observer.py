@@ -214,11 +214,11 @@ class Observer:
 
             print("Hardware mode")
 
-            self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'video', 'state_obs','april_tags', 'rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf', 'navigation']}.values()
+            self.common_nodes = {k:v for k,v in NODES.items() if k in ['roscore', 'robot', 'video', 'state_obs', 'april_tags', 'rosbridge', 'realsense', 'imu', 'drive', 'lidar', 'ekf', 'navigation']}.values()
 
             self.global_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'gps_conv', 'control_global']}.values()
 
-            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver','gps_conv']}.values()
+            self.transition_nodes = {k:v for k,v in NODES.items() if k in ['map_tf', 'gps_driver', 'gps_conv']}.values()
 
             self.slam_nodes = {k:v for k,v in NODES.items() if k in ['map', 'map_local', 'explore']}.values()
 

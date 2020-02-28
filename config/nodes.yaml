@@ -75,6 +75,13 @@
   'topic_type': None
   'timeout': 2.0
   
+'robot':
+  'topic': '/robot_description'
+  'script': 'start_robot_description.sh'
+  'method': 'node'
+  'topic_type': None
+  'timeout': 2.0
+  
 'state_obs':
   'topic': '/system_diagnostics'
   'script': 'start_state_observer.sh'
