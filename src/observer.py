@@ -104,8 +104,8 @@ class Observer:
         }
 
         self.global_glocost_params = {
-            'width': 25.0,
-            'height': 25.0
+            'width': 30.0,
+            'height': 30.0
         }
 
         self.transition_dwa_params = {
@@ -167,13 +167,13 @@ class Observer:
             }
 
         self.slam_locost_params = {
-            'width': 8.0,
-            'height': 8.0
+            'width': 12.0,
+            'height': 12.0
         }
 
         self.slam_glocost_params = {
-            'width': 15.0,
-            'height': 15.0
+            'width': 20.0,
+            'height': 20.0
         }
         
         self.amcl_dwa_params = {
